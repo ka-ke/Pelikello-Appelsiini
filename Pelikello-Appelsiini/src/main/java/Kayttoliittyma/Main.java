@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 package Kayttoliittyma;
-
-import Sovelluslogiikka.Ajastin;
+import Kayttoliittyma.*;
+import Sovelluslogiikka.*;
+import java.util.*;
 
 /**
  *
@@ -13,12 +14,26 @@ import Sovelluslogiikka.Ajastin;
  */
 public class Main {
     
+    static Lukija nappainsyote = new Lukija();
+    
     public static void main(String[] args) {
 
-//        Kellonluonti testi = new Kellonluonti();
-//        testi.luoKello();
         
-        Ajastin testiKello = new Ajastin(0, 30);
-        testiKello.otaAikaa();
+        Kellonluonti testi = new Kellonluonti();
+        Ajastin testiAjastin = testi.luoKello();
+        
+        ArrayList<Pelaaja> vuorolista = new ArrayList();
+        vuorolista.add(new Pelaaja("Teemu", 3));
+        vuorolista.add(new Pelaaja("ASIDOJHqwd", 100));
+        vuorolista.add(new Pelaaja("Jaana", 1));
+        vuorolista.sort(null);
+
+        VuoronEteneminen vuoro = new VuoronEteneminen(testiAjastin);
+        
+        for(int i=0; i<vuorolista.size(); i++){
+            System.out.println("Paina enter niin seuraavan pelaajan vuoro alkaa");
+            String vastaus = nappainsyote.lueRivi();
+            vuoro.ajastaVuoro(vuorolista.get(i));
+        }
     }
 }

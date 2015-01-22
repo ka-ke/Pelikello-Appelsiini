@@ -11,21 +11,37 @@ package Sovelluslogiikka;
  */
 public class Laskuri {
     
-    int raja;
-    int arvo;
+    public int raja;
+    public int arvo;
     
     public Laskuri(int raja, int arvo){
-        this.raja = raja;
-        this.arvo = arvo;
+        if(raja>0){
+            this.raja = raja;
+        } else {
+            this.raja = 59;
+        }
+        
+        if(arvo>this.raja){
+            this.arvo = this.raja;
+        } else if(arvo<0){
+            this.arvo = 0;
+        } else {
+            this.arvo = arvo;
+        }
     }
     
-    public void etene(){
+    public boolean etene(){
+        if(arvo==raja){
+            arvo=0;
+            return true;
+        }
         arvo++;
+        return false;
     }
     
     public boolean vahene(){
         if(arvo==0){
-            arvo=59;
+            arvo=raja;
             return true;
         } else {
             arvo--;
@@ -33,8 +49,14 @@ public class Laskuri {
         }
     }
     
-    public void nollaudu(){
-        arvo=0;
+    public void setArvo(int uusiarvo){
+        if(uusiarvo>this.raja){
+            this.arvo = this.raja;
+        } else if(uusiarvo<0){
+            this.arvo = 0;
+        } else {
+            this.arvo = uusiarvo;
+        }
     }
     
     @Override

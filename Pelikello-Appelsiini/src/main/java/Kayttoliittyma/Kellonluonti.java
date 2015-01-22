@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Kayttoliittyma;
-
+import Sovelluslogiikka.Ajastin;
 /**
  *
  * @author Kasperi
@@ -17,7 +17,7 @@ public class Kellonluonti {
         lukija = new Lukija();
     }
     
-    public void luoKello(){
+    public Ajastin luoKello(){
         
         System.out.println("Paljonko aikaa per vuoro?");
         System.out.println("Syötä ensin minuutit ja sitten sekuntit muodossa AB CD");
@@ -32,7 +32,6 @@ public class Kellonluonti {
         System.out.println("Vastaa joo tai ei");
         
         String vastaus = lukija.lueSana();
-        System.out.println(vastaus);
         if(vastaus.equalsIgnoreCase("joo")){
             System.out.println("Paljon aikaa per pelaaja?");
             System.out.println("Syötä ensin tunnit, toiseksi minuutit ja kolmanneksi sekunnit muodossa AB CD EF");
@@ -46,5 +45,10 @@ public class Kellonluonti {
         }
         
         System.out.println("Kirjoita aloita kun olet valmis aloittamaan pelin");
+        vastaus = lukija.lueSana();
+        while(!vastaus.equals("aloita")){
+        vastaus = lukija.lueSana();
+        }
+        return new Ajastin(minuuttejaVuorossa, sekuntejaVuorossa);
     }
 }
