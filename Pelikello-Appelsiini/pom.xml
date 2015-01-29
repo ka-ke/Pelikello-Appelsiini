@@ -18,7 +18,12 @@
         <version>4.10</version>
         <scope>test</scope>
     </dependency>
-</dependencies>
+        <dependency>
+            <groupId>org.jdesktop</groupId>
+            <artifactId>beansbinding</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+    </dependencies>
 
 <build>
     <plugins>
@@ -39,6 +44,14 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>0.30</version>
+            <configuration>
+                <targetClasses>
+                    <param>Sovelluslogiikka.*</param>
+                </targetClasses>
+                <targetTests>
+                    <param>Sovelluslogiikka.*</param>
+                </targetTests>
+            </configuration>
         </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>

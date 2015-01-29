@@ -13,11 +13,13 @@ public class Pelaaja implements Comparable<Pelaaja> {
     
     public String nimi;
     public int vuoro;
+    public int peliaika;
     
     public Pelaaja(String nimi, int vuoroNumero){
         
         this.nimi = nimi;
         vuoro = vuoroNumero;
+        peliaika = 0;
     }   
 
     @Override

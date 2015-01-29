@@ -18,15 +18,29 @@ public class Lukija {
         lukija = new Scanner(System.in);
     }
     
-    public String lueRivi(){
-        return lukija.nextLine();
-    }
-    
     public int lueLuku(){
-        return lukija.nextInt();
-    }
-    
-    public String lueSana(){
-        return lukija.next();
-    }
+        int luettava;
+        while(true){
+            try {
+                luettava= Integer.parseInt(lukija.nextLine());
+                break;
+            } catch(Exception e){
+                System.out.println("Et syöttänyt ohjeiden mukaista lukua, vastaa uudestaan.");
+            }
+        }
+        return luettava;
+    }    
+
+    public String lueRivi(){
+        String luettava;
+        while(true){
+            try {
+                luettava= lukija.nextLine();
+                break;
+            } catch(Exception e){
+                System.out.println("Et syöttänyt ohjeiden mukaista merkkijonoa, vastaa uudestaan.");
+            }
+        }
+        return luettava;
+    }    
 }

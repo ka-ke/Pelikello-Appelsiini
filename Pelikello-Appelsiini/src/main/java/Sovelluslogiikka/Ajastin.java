@@ -18,20 +18,21 @@ public class Ajastin {
     public Laskuri sekunnit;
     int alkuMinuutit;
     int alkuSekunnit;
+    boolean kaynnissa;
     
     public Ajastin(int alkuMinuutit, int alkuSekunnit){
         this.alkuMinuutit = alkuMinuutit;
         this.alkuSekunnit = alkuSekunnit;
         minuutit = new Laskuri(59, alkuMinuutit);
         sekunnit = new Laskuri(59, alkuSekunnit);
+        kaynnissa = true;
     }
     
     public void otaAikaa(){
-        while(!this.toString().equals("00:00")){
+        while(!this.toString().equals("00:00") && kaynnissa){
             System.out.println(this.toString());
             aikaKuluu();
         }
-        System.out.println("00:00");
     }
     
     public void aikaKuluu(){
@@ -43,6 +44,14 @@ public class Ajastin {
         if(sekunnit.vahene()){
             minuutit.vahene();
         }
+    }
+    
+    public void keskeytaAjastus(){
+        kaynnissa = false;
+    }
+    
+    public void jatkaAjastusta(){
+        kaynnissa = true;
     }
     
     public void alustaAjastin(){
