@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package Kayttoliittyma;
-import Kayttoliittyma.Tekstikayttoliittymat.KellonLuonti;
-import Kayttoliittyma.Tekstikayttoliittymat.PelaajienLuonti;
-import Kayttoliittyma.Tekstikayttoliittymat.PelinLuonti;
+import Kayttoliittyma.Tekstikayttoliittymat.*;
 import Kayttoliittyma.*;
 import Sovelluslogiikka.*;
 import java.util.*;

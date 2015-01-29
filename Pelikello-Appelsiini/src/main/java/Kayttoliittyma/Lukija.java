@@ -23,9 +23,13 @@ public class Lukija {
         while(true){
             try {
                 luettava= Integer.parseInt(lukija.nextLine());
+                if(luettava<0){
+                    virheViestiLuvut();
+                    continue;
+                }
                 break;
             } catch(Exception e){
-                System.out.println("Et syöttänyt ohjeiden mukaista lukua, vastaa uudestaan.");
+                virheViestiLuvut();
             }
         }
         return luettava;
@@ -38,9 +42,17 @@ public class Lukija {
                 luettava= lukija.nextLine();
                 break;
             } catch(Exception e){
-                System.out.println("Et syöttänyt ohjeiden mukaista merkkijonoa, vastaa uudestaan.");
+                virheViestiMerkit();
             }
         }
         return luettava;
-    }    
+    }
+    
+    public void virheViestiLuvut(){
+        System.out.println("Et syöttänyt ohjeiden mukaista lukua, vastaa uudestaan.");
+    }
+    
+    public void virheViestiMerkit(){
+        System.out.println("Et syöttänyt ohjeiden mukaista merkkijonoa, vastaa uudestaan.");
+    }
 }
