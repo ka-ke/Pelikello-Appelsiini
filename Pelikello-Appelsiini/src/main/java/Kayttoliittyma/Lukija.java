@@ -6,53 +6,50 @@
 package Kayttoliittyma;
 
 import java.util.Scanner;
+
 /**
  *
  * @author Kasperi
  */
 public class Lukija {
-    
+
     Scanner lukija;
-    
-    public Lukija(){
+
+    public Lukija() {
         lukija = new Scanner(System.in);
     }
-    
-    public int lueLuku(){
+
+    public int lueLuku() {
         int luettava;
-        while(true){
+        while (true) {
             try {
-                luettava= Integer.parseInt(lukija.nextLine());
-                if(luettava<0){
-                    virheViestiLuvut();
-                    continue;
-                }
+                luettava = Integer.parseInt(lukija.nextLine());
                 break;
-            } catch(Exception e){
+            } catch (Exception e) {
                 virheViestiLuvut();
             }
         }
         return luettava;
-    }    
+    }
 
-    public String lueRivi(){
+    public String lueRivi() {
         String luettava;
-        while(true){
+        while (true) {
             try {
-                luettava= lukija.nextLine();
+                luettava = lukija.nextLine();
                 break;
-            } catch(Exception e){
+            } catch (Exception e) {
                 virheViestiMerkit();
             }
         }
         return luettava;
     }
-    
-    public void virheViestiLuvut(){
+
+    public void virheViestiLuvut() {
         System.out.println("Et syöttänyt ohjeiden mukaista lukua, vastaa uudestaan.");
     }
-    
-    public void virheViestiMerkit(){
+
+    public void virheViestiMerkit() {
         System.out.println("Et syöttänyt ohjeiden mukaista merkkijonoa, vastaa uudestaan.");
     }
 }

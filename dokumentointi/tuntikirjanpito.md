@@ -8,3 +8,7 @@ Koodasin sitä myötä myös pidemmälle. Lopuksi testailin juttuja leikkikäytt
 28.1. 3h [Koti] Tekstikäyttöliittymän parantelua ja sovelluslogiikan pientä parantelua. Sain myös Pitin toimimaan.
 Sain selville, että javalla osia Ajastimen toiminnoista, kuten pysäyttämistä, on vaikea toteuttaa tekstikäyttöliittymästä.
 Osan logiikasta voin siis toteuttaa paremmin kun olen saanut graafista puolta toteutettua.
+04.2. 1h [Koti] Piirsin uuden luokkakaavion ja koodasin uutta ohjausluokkaa käyttöliittymälle. 
+05.2. 6h [Koti] Koetan saada selkoa mm. äänitiedostojen toistosta javaprojektissani ja luen graafisen 
+käyttöliittymän luokista. Luon sovelluslogiikan luokille JUnit-testejä sekä parantelen koodia sieltä 
+sun täältä. Aloitan myös JavaDocin kirjoittamisen.

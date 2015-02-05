@@ -11,6 +11,7 @@ import Kayttoliittyma.Valikot.*;
  */
 public class Valikko extends javax.swing.JFrame {
 
+    UusiPeli up = new UusiPeli();
     /**
      * Creates new form Valikko
      */
@@ -78,6 +79,7 @@ public class Valikko extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pelikello Appelsiini");
 
         UusiPeliNappi.setText("Uusi peli");
         UusiPeliNappi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -85,22 +87,27 @@ public class Valikko extends javax.swing.JFrame {
                 siirry(evt);
             }
         });
+        UusiPeliNappi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UusiPeliNappiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(UusiPeliNappi, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addComponent(UusiPeliNappi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(UusiPeliNappi, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(UusiPeliNappi, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,6 +116,10 @@ public class Valikko extends javax.swing.JFrame {
     private void siirry(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_siirry
         
     }//GEN-LAST:event_siirry
+
+    private void UusiPeliNappiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UusiPeliNappiActionPerformed
+        up.setVisible(rootPaneCheckingEnabled);        // TODO add your handling code here:
+    }//GEN-LAST:event_UusiPeliNappiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +150,7 @@ public class Valikko extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Valikko().setVisible(true);
             }

@@ -13,54 +13,65 @@ import java.util.logging.Logger;
  * @author Kasperi
  */
 public class Ajastin {
-    
+
+    public Laskuri tunnit;
     public Laskuri minuutit;
     public Laskuri sekunnit;
+    int alkuTunnit;
     int alkuMinuutit;
     int alkuSekunnit;
-    boolean kaynnissa;
-    
-    public Ajastin(int alkuMinuutit, int alkuSekunnit){
+//    boolean kaynnissa;
+    boolean testataan = false;
+
+    public Ajastin(int alkuTunnit, int alkuMinuutit, int alkuSekunnit) {
+        this.alkuTunnit = alkuTunnit;
         this.alkuMinuutit = alkuMinuutit;
         this.alkuSekunnit = alkuSekunnit;
+        tunnit = new Laskuri(23, alkuTunnit);
         minuutit = new Laskuri(59, alkuMinuutit);
         sekunnit = new Laskuri(59, alkuSekunnit);
-        kaynnissa = true;
+//        kaynnissa = true;
     }
-    
-    public void otaAikaa(){
-        while(!this.toString().equals("00:00") && kaynnissa){
-            System.out.println(this.toString());
-            aikaKuluu();
-        }
+
+    public Ajastin(int alkuMinuutit, int alkuSekunnit) {
+        this(-1, alkuMinuutit, alkuSekunnit);
     }
-    
-    public void aikaKuluu(){
-        try {
+
+    public void aikaKuluu() {
+        // testiä ajettaessa ei tarvitse odottaa
+        if (testataan == false) {
+            try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Ajastin.class.getName()).log(Level.SEVERE, null, ex);
             }
-        if(sekunnit.vahene()){
-            minuutit.vahene();
+        }
+        if (sekunnit.vahene()) {
+            if (minuutit.vahene()) {
+                tunnit.vahene();
+            }
         }
     }
-    
-    public void keskeytaAjastus(){
-        kaynnissa = false;
-    }
-    
-    public void jatkaAjastusta(){
-        kaynnissa = true;
-    }
-    
-    public void alustaAjastin(){
+
+    // keskeyttämistoiminnallisuus lisätään graafisen käyttöliittymän myötä
+//    public void keskeytaAjastus() {
+//        kaynnissa = false;
+//    }
+//
+//    public void jatkaAjastusta() {
+//        kaynnissa = true;
+//    }
+    public void alustaAjastin() {
+        tunnit.arvo = alkuTunnit;
         minuutit.arvo = alkuMinuutit;
         sekunnit.arvo = alkuSekunnit;
     }
-    
+
     @Override
-    public String toString(){
-        return minuutit.toString()+":"+sekunnit.toString();
-    }    
+    public String toString() {
+        if (alkuTunnit == -1) {
+            return minuutit.toString() + ":" + sekunnit.toString();
+        }
+        return tunnit.toString() + ":" + minuutit.toString() + ":" + sekunnit.toString();
+    }
 }

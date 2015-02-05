@@ -44,14 +44,14 @@ public class LaskuriTest {
     
     @Test
     public void eiVoiAlustaaNegatiivistaArvoa(){
-        Laskuri negatiivi = new Laskuri(99, -50);
+        Laskuri negatiivi = new Laskuri(59, -50);
         assertEquals(0, negatiivi.arvo);
     }
     
     @Test
     public void rajaEiVoiOllaNegatiivinen(){
-        Laskuri negatiivi = new Laskuri(-1, 10);
-        assertEquals(59, negatiivi.raja);
+        Laskuri negatiivi = new Laskuri(-5, 10);
+        assertEquals(0, negatiivi.raja);
     }
     
     @Test

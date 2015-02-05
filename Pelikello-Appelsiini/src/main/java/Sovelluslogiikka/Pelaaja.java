@@ -10,21 +10,38 @@ package Sovelluslogiikka;
  * @author Kasperi
  */
 public class Pelaaja implements Comparable<Pelaaja> {
-    
+
     public String nimi;
     public int vuoro;
-    public int peliaika;
-    
-    public Pelaaja(String nimi, int vuoroNumero){
-        
+    public int peliMinuutit;
+    public int peliSekunnit;
+
+    public Pelaaja(String nimi, int vuoroNumero) {
+
         this.nimi = nimi;
         vuoro = vuoroNumero;
-        peliaika = 0;
-    }   
+        peliMinuutit = 0;
+        peliSekunnit = 0;
+    }
 
     @Override
     public int compareTo(Pelaaja verrattava) {
-        if(this.vuoro<verrattava.vuoro){
+
+        if (this.vuoro == verrattava.vuoro) {
+
+            int i = 0;
+            while (this.nimi.charAt(i) == verrattava.nimi.charAt(i)) {
+                i++;
+            }
+
+            if (this.nimi.charAt(i) < verrattava.nimi.charAt(i)) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+
+        if (this.vuoro < verrattava.vuoro) {
             return -1;
         } else {
             return 1;

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Sovelluslogiikka;
+
 import Sovelluslogiikka.*;
 import java.util.*;
 
@@ -12,52 +13,63 @@ import java.util.*;
  * @author Kasperi
  */
 public class Peli {
-    
+
     public int pelattujaVuoroja;
     public int vuoroRaja;
     public int vuorossa;
-    boolean kaynnissa;
-    boolean rajaton;
-    List<Pelaaja> pelaajat;
+    public List<Pelaaja> pelaajat;
     Ajastin ajastin;
-    
-    public Peli(Ajastin ajastin, List<Pelaaja> pelaajat, int vuoroja){
+    public boolean testataan = false;
+//    Ajastin aikaRaja;
+
+// aikarajoittimen toiminnallisuus lisätään vasta graafiseen käyttöliittymään    
+    public Peli(Ajastin ajastin, List<Pelaaja> pelaajat, int vuoroja) {
         pelattujaVuoroja = 0;
         vuoroRaja = vuoroja;
         this.ajastin = ajastin;
         this.pelaajat = pelaajat;
+//        this.aikaRaja = aikaRaja;
         vuorossa = 0;
-        kaynnissa = true;
     }
-    
-    public Peli(Ajastin ajastin, List<Pelaaja> pelaajat){
-        this(ajastin, pelaajat, -1);
-    }
-    
-    public void aloitaPeli(){
-        pelaaVuoro(vuorossa);
-    }
-    
-    public void seuraavaVuoro(){
+
+    public Pelaaja seuraavaPelaaja() {
         vuorossa++;
-        if(vuorossa==pelaajat.size()){
-            vuorossa=0;
+        if (vuorossa == pelaajat.size()) {
+            vuorossa = 0;
         }
-        pelaaVuoro(vuorossa);
+        return pelaajat.get(vuorossa);
     }
-    
-    public void pelaaVuoro(int vuorossa){
+
+    public void pelaaVuoro() {
         Pelaaja pelaaja = pelaajat.get(vuorossa);
-        ajastin.otaAikaa();
+
+        while (!ajastin.toString().equals("00:00")) {
+            if (testataan == false) { // testejä ajaessa ei tarvitse turhaan tulostella
+                System.out.println(ajastin);
+            }
+            ajastin.aikaKuluu();
+        }
         ajastin.alustaAjastin();
+
+//        pelaaja.peliMinuutit += ajastin.alkuMinuutit;
+//        pelaaja.peliSekunnit += ajastin.alkuSekunnit;
         pelattujaVuoroja++;
     }
     
-    public void lopetaVuoro(){
-        ajastin.keskeytaAjastus();
-    }   
-    
-    public void lopetaPeli(){
-        kaynnissa = false;
+    public void setVuorossa(int vuoro){
+        if(vuoro >= 0 && vuoro < pelaajat.size()){
+            vuorossa = vuoro;
+        }
     }
+
+// seuraavat toiminnallisuudet otetaan mukaan vasta graafiseen käyttöliittymään
+//    
+//    public void lopetaVuoro() {
+//        ajastin.keskeytaAjastus();
+//    }
+//    
+//    public void poistaPelaaja(Pelaaja poistettava) {
+//        pelaajat.remove(poistettava);
+//        pelaajat.sort(null);
+//    }
 }
