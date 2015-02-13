@@ -5,9 +5,10 @@
  */
 package Kayttoliittyma;
 
-import Kayttoliittyma.Tekstikayttoliittymat.*;
+import Kayttoliittyma.*;
 import Sovelluslogiikka.*;
 import Aaniefektit.*;
+import Kayttoliittyma.Valikot.Kaynnistysvalikko;
 /**
  *
  * @author Kasperi
@@ -26,13 +27,16 @@ public class Main {
     
     public static void main(String[] args) {
         
+        Kaynnistysvalikko k = new Kaynnistysvalikko();
+        k.run();
+        
         // /Users/Kasperi/Pelikello-Appelsiini/Pelikello-Appelsiini/src/main/resources/sounds/Blip.wav        
         
-        Lukija lukija = new Lukija();
-        PelinLuonninOhjaaja pelinLuoja = new PelinLuonninOhjaaja(lukija);
-        Peli peli = pelinLuoja.luoPeli();
-
-        PelinOhjaaja pelinOhjaus = new PelinOhjaaja(lukija, peli);
-        pelinOhjaus.pelaaPeli();
+//        Lukija lukija = new Lukija();
+//        PelinLuonninOhjaaja pelinLuoja = new PelinLuonninOhjaaja(lukija);
+//        Peli peli = pelinLuoja.luoPeli();
+//
+//        PelinOhjaaja pelinOhjaus = new PelinOhjaaja(lukija, peli);
+//        pelinOhjaus.pelaaPeli();
     }
 }

@@ -12,3 +12,4 @@ Osan logiikasta voin siis toteuttaa paremmin kun olen saanut graafista puolta to
 05.2. 6h [Koti] Koetan saada selkoa mm. äänitiedostojen toistosta javaprojektissani ja luen graafisen 
 käyttöliittymän luokista. Luon sovelluslogiikan luokille JUnit-testejä sekä parantelen koodia sieltä 
 sun täältä. Aloitan myös JavaDocin kirjoittamisen.
+13.2. 2h [Vanhempien luona] Koetan keretä työstämään hieman jotakin ennen deadlineä. Kiireisen viikon takia jäi javalabra hoitamatta tältä viikolta.
