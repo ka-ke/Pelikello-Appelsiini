@@ -13,15 +13,13 @@ public class Pelaaja implements Comparable<Pelaaja> {
 
     public String nimi;
     public int vuoro;
-    public int peliMinuutit;
-    public int peliSekunnit;
+    public Ajastin peliAika;
 
     public Pelaaja(String nimi, int vuoroNumero) {
 
         this.nimi = nimi;
         vuoro = vuoroNumero;
-        peliMinuutit = 0;
-        peliSekunnit = 0;
+        peliAika = new Ajastin(0,0);
     }
 
     @Override
@@ -46,5 +44,13 @@ public class Pelaaja implements Comparable<Pelaaja> {
         } else {
             return 1;
         }
+    }
+    
+    public String getPeliAika(){
+        if (peliAika.alkuTunnit == -1) {
+            return peliAika.minuutit.toString() + ":" + peliAika.sekunnit.toString();
+        }
+        return peliAika.tunnit.toString() + ":" + 
+                peliAika.minuutit.toString() + ":" + peliAika.sekunnit.toString();
     }
 }

@@ -38,17 +38,25 @@ public class Ajastin {
     }
 
     public void aikaKuluu() {
-        // testiä ajettaessa ei tarvitse odottaa
-        if (testataan == false) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Ajastin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        // testiä ajettaessa ei tarvitse odottaa eikä graafisessa
+//        if (testataan == false) {
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(Ajastin.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         if (sekunnit.vahene()) {
             if (minuutit.vahene()) {
                 tunnit.vahene();
+            }
+        }
+    }
+    
+    public void aikaaMenee(){
+        if(sekunnit.etene()){
+            if(minuutit.etene()){
+                tunnit.etene();
             }
         }
     }

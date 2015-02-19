@@ -58,19 +58,19 @@ public class PeliTest {
     @Test
     public void seuraavaPelaajaToimii(){
         peli.setVuorossa(0);
-        assertEquals(peli.pelaajat.get(1), peli.seuraavaPelaaja());
+        assertEquals(peli.pelaajat.get(1), peli.getSeuraavaPelaaja());
     }
     
     @Test
     public void kierrosPyorahtaaYmpari(){
         peli.setVuorossa(peli.pelaajat.size()-1);
-        assertEquals(peli.pelaajat.get(0), peli.seuraavaPelaaja());
+        assertEquals(peli.pelaajat.get(0), peli.getSeuraavaPelaaja());
     }
     
     @Test
     public void pelatutVuorotKasvavat(){
         int testi = peli.pelattujaVuoroja;
-        peli.pelaaVuoro();
+        peli.pelaaVuoroTekstiKayttoLiittyma();
         assertEquals(testi+1, peli.pelattujaVuoroja);
     }
     

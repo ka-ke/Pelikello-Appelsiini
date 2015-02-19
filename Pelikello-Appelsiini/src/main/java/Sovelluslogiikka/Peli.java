@@ -18,7 +18,7 @@ public class Peli {
     public int vuoroRaja;
     public int vuorossa;
     public List<Pelaaja> pelaajat;
-    Ajastin ajastin;
+    public Ajastin ajastin;
     public boolean testataan = false;
 //    Ajastin aikaRaja;
 
@@ -32,15 +32,14 @@ public class Peli {
         vuorossa = 0;
     }
 
-    public Pelaaja seuraavaPelaaja() {
+    public void vuoroSiirtyy() {
         vuorossa++;
         if (vuorossa == pelaajat.size()) {
             vuorossa = 0;
         }
-        return pelaajat.get(vuorossa);
     }
 
-    public void pelaaVuoro() {
+    public void pelaaVuoroTekstiKayttoLiittyma() {
         Pelaaja pelaaja = pelaajat.get(vuorossa);
 
         while (!ajastin.toString().equals("00:00")) {
@@ -50,24 +49,33 @@ public class Peli {
             ajastin.aikaKuluu();
         }
         ajastin.alustaAjastin();
-
-//        pelaaja.peliMinuutit += ajastin.alkuMinuutit;
-//        pelaaja.peliSekunnit += ajastin.alkuSekunnit;
         pelattujaVuoroja++;
     }
-    
-    public void setVuorossa(int vuoro){
-        if(vuoro >= 0 && vuoro < pelaajat.size()){
+
+    public void pelaaVuoroGraafisessa() {
+        getPelaaja(vuorossa).peliAika.aikaaMenee();
+        ajastin.aikaKuluu();
+    }
+
+    public void setVuorossa(int vuoro) {
+        if (vuoro >= 0 && vuoro < pelaajat.size()) {
             vuorossa = vuoro;
         }
     }
 
-// seuraavat toiminnallisuudet otetaan mukaan vasta graafiseen käyttöliittymään
-//    
-//    public void lopetaVuoro() {
-//        ajastin.keskeytaAjastus();
-//    }
-//    
+    public Pelaaja getPelaaja(int vuoro) {
+        if (vuoro >= pelaajat.size()) {
+            return pelaajat.get(0);
+        }
+        return pelaajat.get(vuoro);
+    }
+
+    public Pelaaja getSeuraavaPelaaja() {
+        if (vuorossa == pelaajat.size() - 1) {
+            return pelaajat.get(0);
+        }
+        return pelaajat.get(vuorossa + 1);
+    }
 //    public void poistaPelaaja(Pelaaja poistettava) {
 //        pelaajat.remove(poistettava);
 //        pelaajat.sort(null);

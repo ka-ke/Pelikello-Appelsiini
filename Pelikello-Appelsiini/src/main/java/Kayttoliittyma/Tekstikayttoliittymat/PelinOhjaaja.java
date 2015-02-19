@@ -47,13 +47,13 @@ public class PelinOhjaaja {
         }
         
         System.out.println("Pelin aloittaa: " + peli.pelaajat.get(peli.vuorossa).nimi);
-        peli.pelaaVuoro();        
+        peli.pelaaVuoroTekstiKayttoLiittyma();        
     }
 
     public void seuraavanVuoro() {
-        Pelaaja pelaaja = peli.seuraavaPelaaja();
+        Pelaaja pelaaja = peli.getSeuraavaPelaaja();
         System.out.println("Vuorossa: "+pelaaja.nimi);
-        peli.pelaaVuoro();
+        peli.pelaaVuoroTekstiKayttoLiittyma();
     }
 
     public void lopetaPeli() {

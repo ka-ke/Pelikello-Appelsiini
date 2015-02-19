@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Kayttoliittyma.Valikot;
+
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,7 +20,7 @@ import javax.swing.WindowConstants;
 public class Kaynnistysvalikko implements Runnable {
 
     private JFrame laatikko;
-    
+
     @Override
     public void run() {
         laatikko = new JFrame("Pelikello-Appelsiini");
@@ -32,11 +33,11 @@ public class Kaynnistysvalikko implements Runnable {
         laatikko.pack();
         laatikko.setVisible(true);
     }
-    
+
     private void luoKomponentit(Container loota) {
-    
-        loota.setLayout(new GridLayout(2,1));
-        
+
+        loota.setLayout(new GridLayout(2, 1));
+
         JButton aloita = new JButton("Aloita peli");
         ActionListener pelivalikkoon = new ActionListener() {
 
@@ -46,16 +47,11 @@ public class Kaynnistysvalikko implements Runnable {
                 peli.run();
             }
         };
-        
+
         aloita.addActionListener(pelivalikkoon);
         JButton aikaa = new JButton("Ota aikaa");
-        
+
         loota.add(aloita);
         loota.add(aikaa);
-//        laatikko.setSize(loota.getPreferredSize());
-    }
-
-    public JFrame getFrame() {
-        return laatikko;
     }
 }
