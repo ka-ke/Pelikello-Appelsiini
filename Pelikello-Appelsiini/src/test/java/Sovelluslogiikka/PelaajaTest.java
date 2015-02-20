@@ -47,8 +47,23 @@ public class PelaajaTest {
     }
 
     @Test
+    public void isompiVuoroPelaaToisena() {
+        assertEquals(1, kolmas.compareTo(eka));
+    }
+
+    @Test
     public void samaVuoroAakkosissaAiempiPelaaEnsin() {
         assertEquals(-1, toka.compareTo(kolmas));
+    }
+
+    @Test
+    public void samaVuoroAakkosisMyohempiPelaaToisena() {
+        assertEquals(1, kolmas.compareTo(toka));
+    }
+
+    @Test
+    public void peliAikaOnAluksiNolla() {
+        assertEquals("00:00:00", eka.getPeliAika());
     }
 
 }

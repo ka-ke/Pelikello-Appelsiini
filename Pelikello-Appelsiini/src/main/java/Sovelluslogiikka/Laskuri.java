@@ -8,7 +8,6 @@ package Sovelluslogiikka;
 /**
  * Luokka, joka ylläpitää ylhäältä vapaasti valitusta sekä alhaalta nollasta
  * rajoitettua laskuria.
- *
  * @author Kasperi
  */
 public class Laskuri {
@@ -17,9 +16,7 @@ public class Laskuri {
     public int arvo;
 
     /**
-     * Laskurin konstruktointi parametrein.
      * Jos arvo asetetaan suuremmaksi kuin raja, se asettuu automaattisesti rajaan.
-     * 
      *  @param  raja Laskurin positiivinen yläraja.
      * @param arvo Positiivnen lukuarvo, josta laskuri lähtee liikkeelle. 
      */
@@ -38,7 +35,6 @@ public class Laskuri {
     /**
      * Metodi kasvattaa arvoa yhdellä. Jos arvo menisi yli rajan, asetetaan
      * siihen sen sijaan nolla, eli arvo "pyörähtää kierroksen ympäri".
-     *
      * @return True, jos arvo pyörähti ympäri, false jos ei.
      */
     public boolean etene() {
@@ -53,7 +49,6 @@ public class Laskuri {
     /**
      * Metodi vahentaa arvoa yhdellä. Jos arvo menisi negatiiviseksi, asetetaan
      * siihen sen sijaan raja, eli arvo "pyörähtää kierroksen ympäri".
-     *
      * @return True, jos arvo pyörähti ympäri, false jos ei.
      */
     public boolean vahene() {
@@ -70,7 +65,6 @@ public class Laskuri {
      * Metodin avulla laskurin arvon voi asettaa tarvittaessa mihin tahansa
      * lukuarvoon nollan ja rajan välillä. Jos arvoksi asettaa rajaa suuremman
      * arvon, tulee uudeksi arvoksi raja. Negatiivisilla arvoilla arvo ei muutu.
-     *
      * @param uusiarvo arvoksi asetettava luku
      */
     public void setArvo(int uusiarvo) {
@@ -85,7 +79,6 @@ public class Laskuri {
 
     /**
      * Luokkaa edustava merkkijono, joka muistuttaa digitaalisen kellon esitysmuotoa.
-     * 
      * @return Jos arvo on alle 10, lisätään nolla eteen. Muulloin palautetaan arvo. 
      */
     

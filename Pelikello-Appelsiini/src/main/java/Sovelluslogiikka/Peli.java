@@ -9,6 +9,7 @@ import Sovelluslogiikka.*;
 import java.util.*;
 
 /**
+ * Luokka, joka kokoaa kaiken pelin liittyvän tiedon ja toiminnallisuuden.
  *
  * @author Kasperi
  */
@@ -20,18 +21,29 @@ public class Peli {
     public List<Pelaaja> pelaajat;
     public Ajastin ajastin;
     public boolean testataan = false;
-//    Ajastin aikaRaja;
+    public boolean aikaLoppui = false;
+    Ajastin aikaRaja;
 
-// aikarajoittimen toiminnallisuus lisätään vasta graafiseen käyttöliittymään    
-    public Peli(Ajastin ajastin, List<Pelaaja> pelaajat, int vuoroja) {
+    /**
+     * Asettaa myös pelatut vuorot ja ensimmäisen vuoronumeron nollaksi.
+     *
+     * @param ajastin Ajastin, jonka mukaan mitataan pelivuoron kestoa.
+     * @param pelaajat Lista mukana olevista pelaajista.
+     * @param vuoroja Määrää pelattavien vuorojen lukumäärän jos positiivnen.
+     * @param aikaRaja Määrää käytössä olevan ajan, mikäli yli sekunnin.
+     */
+    public Peli(Ajastin ajastin, List<Pelaaja> pelaajat, int vuoroja, Ajastin aikaRaja) {
         pelattujaVuoroja = 0;
         vuoroRaja = vuoroja;
         this.ajastin = ajastin;
         this.pelaajat = pelaajat;
-//        this.aikaRaja = aikaRaja;
+        this.aikaRaja = aikaRaja;
         vuorossa = 0;
     }
 
+    /**
+     * Vuoronumero kasvaa yhdellä tai palaa alkuun.
+     */
     public void vuoroSiirtyy() {
         vuorossa++;
         if (vuorossa == pelaajat.size()) {
@@ -39,6 +51,9 @@ public class Peli {
         }
     }
 
+    /**
+     * Tekstikäyttöliittymässä käytetty vuoronetenemiseen.
+     */
     public void pelaaVuoroTekstiKayttoLiittyma() {
         Pelaaja pelaaja = pelaajat.get(vuorossa);
 
@@ -52,17 +67,32 @@ public class Peli {
         pelattujaVuoroja++;
     }
 
+    /**
+     * GUI:ssa käytettävä metodi ajanmittaamiseen. Vähentää vuoron aikaa, lisää
+     * pelaajan pelattua aikaa ja tarkistaa, loppuuko peliaika.
+     */
     public void pelaaVuoroGraafisessa() {
-        getPelaaja(vuorossa).peliAika.aikaaMenee();
         ajastin.aikaKuluu();
+        Ajastin peliAika = getPelaaja(vuorossa).peliAika;
+        peliAika.aikaaMenee();
+        if (aikaRaja.toString().equals(peliAika.toString())) {
+            aikaLoppui = true;
+        }
     }
 
+    /**
+     * @param vuoro Asettaa vuoron annetuksi pelaajien rajoissa.
+     */
     public void setVuorossa(int vuoro) {
         if (vuoro >= 0 && vuoro < pelaajat.size()) {
             vuorossa = vuoro;
         }
     }
 
+    /**
+     * @param vuoro Vuoropaikka, jolla oleva pelaaja tahdotaan selvittää.
+     * @return Palauttaa vuoropaikalla vuoro.
+     */
     public Pelaaja getPelaaja(int vuoro) {
         if (vuoro >= pelaajat.size()) {
             return pelaajat.get(0);
@@ -70,6 +100,9 @@ public class Peli {
         return pelaajat.get(vuoro);
     }
 
+    /**
+     * @return Palauttaa seuraavaksi pelaavan pelaajan.
+     */
     public Pelaaja getSeuraavaPelaaja() {
         if (vuorossa == pelaajat.size() - 1) {
             return pelaajat.get(0);

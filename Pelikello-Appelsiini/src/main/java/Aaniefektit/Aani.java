@@ -7,7 +7,7 @@ package Aaniefektit;
 import java.applet.Applet;
 import java.applet.AudioClip;
 /**
- *
+ * Ääniefekti, jonka on tarkoitus ilmoittaa pelajille ajan hupenemisesta.
  * @author Kasperi
  */
 public class Aani {

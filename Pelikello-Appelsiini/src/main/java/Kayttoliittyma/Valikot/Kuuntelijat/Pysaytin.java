@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 /**
- *
+ * Kuuntelija ajanoton pysäyttämistä varten.
  * @author Kasperi
  */
 public class Pysaytin implements ActionListener {
@@ -23,7 +23,6 @@ public class Pysaytin implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         timer.stop();
     }
 }

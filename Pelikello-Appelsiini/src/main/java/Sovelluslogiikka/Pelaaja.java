@@ -6,6 +6,7 @@
 package Sovelluslogiikka;
 
 /**
+ * Pelaaja esittää yhtä sen hetken käyttäjistä.
  *
  * @author Kasperi
  */
@@ -15,13 +16,29 @@ public class Pelaaja implements Comparable<Pelaaja> {
     public int vuoro;
     public Ajastin peliAika;
 
+    /**
+     * Konstruktorissa luodaan myös ajastin, joka mittaa kaikilla vuoroilla
+     * yhteensä käytettyä peliaikaa.
+     *
+     * @param nimi Asetetaan merkkijono, joka edustaa pelaajaa
+     * käyttöliittymässä.
+     * @param vuoroNumero Jatkoa varten hyödyllinen vertailtava lukuarvo.
+     * Käytännössä järjestysnumerot määräytyvät automaattisesti.
+     */
     public Pelaaja(String nimi, int vuoroNumero) {
 
         this.nimi = nimi;
         vuoro = vuoroNumero;
-        peliAika = new Ajastin(0,0);
+        peliAika = new Ajastin(0, 0, 0);
     }
 
+    /**
+     * Vertailee pelaajia järjestysnumeroiden perusteella.
+     *
+     * @param verrattava Pelaaja johon tätä pelaajaa verrataan.
+     * @return Pienemmän vuoronumeron pelaaja päätyy järjestyksessä
+     * ensimmäiseksi. Tasatilanteessa nimien aakkosjärjestys ratkaisee.
+     */
     @Override
     public int compareTo(Pelaaja verrattava) {
 
@@ -45,12 +62,13 @@ public class Pelaaja implements Comparable<Pelaaja> {
             return 1;
         }
     }
-    
-    public String getPeliAika(){
-        if (peliAika.alkuTunnit == -1) {
-            return peliAika.minuutit.toString() + ":" + peliAika.sekunnit.toString();
-        }
-        return peliAika.tunnit.toString() + ":" + 
-                peliAika.minuutit.toString() + ":" + peliAika.sekunnit.toString();
+
+    /**
+     * @return Palauttaa kaikilla vuoroilla yhteensä käytetyn peliajan
+     * digitaaliesityksenä.
+     */
+    public String getPeliAika() {
+        return peliAika.tunnit.toString() + ":"
+                + peliAika.minuutit.toString() + ":" + peliAika.sekunnit.toString();
     }
 }

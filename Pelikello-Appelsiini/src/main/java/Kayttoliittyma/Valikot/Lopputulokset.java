@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
+ * Näyttää paljonko kukin pelaaja käytti peliaikaa ja kiittää pelistä.
  *
  * @author Kasperi
  */
@@ -22,6 +23,9 @@ public class Lopputulokset {
     Peli peli;
     JFrame laatikko;
 
+    /**
+     * @param peli Saa tiedot pelistä.
+     */
     public Lopputulokset(Peli peli) {
         this.peli = peli;
     }
@@ -36,6 +40,10 @@ public class Lopputulokset {
         laatikko.setVisible(true);
     }
 
+    /**
+     * Alustaa ikkunan sisällön. Jokaista pelaajaa kohden luodaan oma
+     * tekstirivinsä.
+     */
     private void luoKomponentit(Container loota) {
 
         BoxLayout y = new BoxLayout(loota, BoxLayout.Y_AXIS);
@@ -50,7 +58,9 @@ public class Lopputulokset {
         lopeta.addActionListener(lopetaPeli);
         loota.add(lopeta);
     }
-
+    /**
+     * Lopettaa pelin, jolloin käynnistysvalikko jää näkyviin.
+     */
     ActionListener lopetaPeli = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

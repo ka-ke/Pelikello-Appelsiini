@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma;
+package Kayttoliittyma.Tekstikayttoliittymat;
 
 import java.util.Scanner;
 
 /**
- *
+ * Tekstikäyttöliittymässä käyttäjän syöteen lukija. Ei enää käytössä GUI:n valmistuttua.
  * @author Kasperi
  */
 public class Lukija {

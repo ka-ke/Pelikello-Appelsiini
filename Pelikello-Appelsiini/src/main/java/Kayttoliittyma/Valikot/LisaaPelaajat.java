@@ -20,6 +20,8 @@ import javax.swing.*;
 import javax.swing.WindowConstants;
 
 /**
+ * Asetusten jälkeen seuraava ikkuna, jonka avulla lisätään valittu määrä
+ * pelaajia.
  *
  * @author Kasperi
  */
@@ -28,6 +30,7 @@ public class LisaaPelaajat implements Runnable {
     private JFrame laatikko;
     List<Pelaaja> pelaajat;
     Ajastin ajastin;
+    Ajastin aikaRaja;
     int vuoroja;
     int pelaajia;
     int lisattava = 1;
@@ -36,11 +39,15 @@ public class LisaaPelaajat implements Runnable {
     TextField nimiText;
     JLabel pelaajanNimi;
 
-    public LisaaPelaajat(List<Pelaaja> pelaajat, Ajastin ajastin, int vuoroja, int pelaajia) {
+    /**
+     * Parametreina annetaan pelin luomiseen tarvittavat tiedot asetusvalikosta.
+     */
+    public LisaaPelaajat(List<Pelaaja> pelaajat, Ajastin ajastin, int vuoroja, Ajastin aikaRaja, int pelaajia) {
         this.pelaajat = pelaajat;
         this.ajastin = ajastin;
         this.vuoroja = vuoroja;
         this.pelaajia = pelaajia;
+        this.aikaRaja = aikaRaja;
     }
 
     @Override
@@ -60,6 +67,9 @@ public class LisaaPelaajat implements Runnable {
         huonoNimi.run();
     }
 
+    /**
+     * Asetetaan ikkunan sisältö ja toiminnallisuus lisää-painikkeelle.
+     */
     private void luoKomponentit(final Container loota) {
 
         loota.setLayout(new GridLayout(2, 2));
@@ -73,7 +83,10 @@ public class LisaaPelaajat implements Runnable {
 
         lisaa.addActionListener(lisaaPelaaja);
     }
-
+    /**
+     * Kuuntelija lisää pelaajan listaan, jos nimimerkki ei ole käytössä ja ei
+     * ole tyhjä.
+     */
     ActionListener lisaaPelaaja = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -97,7 +110,7 @@ public class LisaaPelaajat implements Runnable {
 
             if (lisattava > pelaajia) {
                 laatikko.setVisible(false);
-                Peliruutu peliruutu = new Peliruutu(new Peli(ajastin, pelaajat, vuoroja));
+                PeliRuutu peliruutu = new PeliRuutu(new Peli(ajastin, pelaajat, vuoroja, aikaRaja));
                 peliruutu.run();
             }
         }

@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
+ * Pohja kevyelle ilmoitusikkunalle, joka on vain tarkoitus lukea ja kuitata.
  *
  * @author Kasperi
  */
@@ -23,6 +24,9 @@ public class IlmoitusLoota implements Runnable {
     private JFrame virhe;
     String viesti;
 
+    /**
+     * @param viesti Teksti, joka on perustelu ikkunan luomisele.
+     */
     public IlmoitusLoota(String viesti) {
         this.viesti = viesti;
     }
@@ -39,6 +43,9 @@ public class IlmoitusLoota implements Runnable {
         virhe.setVisible(false);
     }
 
+    /**
+     * Asettaa ikkunan sisällön sekä toiminnallisuuden poistumista varten.
+     */
     private void luoKomponentit(Container loota) {
 
         loota.setLayout(new GridLayout(2, 1));

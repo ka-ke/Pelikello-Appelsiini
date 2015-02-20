@@ -5,10 +5,11 @@
  */
 package Kayttoliittyma.Tekstikayttoliittymat;
 
-import Kayttoliittyma.Lukija;
 import Sovelluslogiikka.*;
 
 /**
+ * Tekstikäyttöliittymässä pelin etenemistä ohjaava luokka. Ei enää käytössä
+ * GUI:n valmistuttua.
  *
  * @author Kasperi
  */
@@ -22,10 +23,10 @@ public class PelinOhjaaja {
         this.peli = peli;
         this.lukija = lukija;
     }
-    
-    public void pelaaPeli(){
+
+    public void pelaaPeli() {
         aloitaPeli();
-        
+
         while (true) {
             String vastaus = "-1";
             System.out.println("Paina enter niin seuraavan pelaajan vuoro alkaa");
@@ -45,14 +46,14 @@ public class PelinOhjaaja {
         while (!vastaus.equals("aloita")) {
             vastaus = lukija.lueRivi();
         }
-        
+
         System.out.println("Pelin aloittaa: " + peli.pelaajat.get(peli.vuorossa).nimi);
-        peli.pelaaVuoroTekstiKayttoLiittyma();        
+        peli.pelaaVuoroTekstiKayttoLiittyma();
     }
 
     public void seuraavanVuoro() {
         Pelaaja pelaaja = peli.getSeuraavaPelaaja();
-        System.out.println("Vuorossa: "+pelaaja.nimi);
+        System.out.println("Vuorossa: " + pelaaja.nimi);
         peli.pelaaVuoroTekstiKayttoLiittyma();
     }
 

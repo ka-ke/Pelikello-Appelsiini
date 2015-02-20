@@ -8,30 +8,31 @@ package Kayttoliittyma;
 import Kayttoliittyma.*;
 import Sovelluslogiikka.*;
 import Aaniefektit.*;
-import Kayttoliittyma.Valikot.Kaynnistysvalikko;
+import Kayttoliittyma.Valikot.KaynnistysValikko;
+
 /**
  *
  * @author Kasperi
  */
 public class Main {
 
-        private Aani aani;
-        
-        public void start(){
-            init();
-            new Thread((Runnable) this).start();
-        }
-        public void init(){
-            Aani.aani1.toista();
-        }
-    
+    private Aani aani;
+
+    public void start() {
+        init();
+        new Thread((Runnable) this).start();
+    }
+
+    public void init() {
+        Aani.aani1.toista();
+    }
+
     public static void main(String[] args) {
-        
-        Kaynnistysvalikko k = new Kaynnistysvalikko();
+
+        KaynnistysValikko k = new KaynnistysValikko();
         k.run();
-        
+
         // /Users/Kasperi/Pelikello-Appelsiini/Pelikello-Appelsiini/src/main/resources/sounds/Blip.wav        
-        
 //        Lukija lukija = new Lukija();
 //        PelinLuonninOhjaaja pelinLuoja = new PelinLuonninOhjaaja(lukija);
 //        Peli peli = pelinLuoja.luoPeli();

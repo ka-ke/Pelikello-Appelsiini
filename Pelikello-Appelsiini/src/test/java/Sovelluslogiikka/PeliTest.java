@@ -28,8 +28,8 @@ public class PeliTest {
         }
 
         Ajastin ajastin = new Ajastin(0, 3);
-
-        peli = new Peli(ajastin, pelaajat, 2);
+        Ajastin aikaRaja = new Ajastin(0, 0, 10);
+        peli = new Peli(ajastin, pelaajat, 2, aikaRaja);
         peli.testataan = true;
         peli.ajastin.testataan = true;
     }
@@ -43,7 +43,7 @@ public class PeliTest {
     }
 
     @Before
-    public void setUp() {        
+    public void setUp() {
     }
 
     @After
@@ -51,40 +51,77 @@ public class PeliTest {
     }
 
     @Test
-    public void pelaajalistaOnOikeanKokoinen(){
-        assertEquals(5,peli.pelaajat.size());
+    public void pelaajalistaOnOikeanKokoinen() {
+        assertEquals(5, peli.pelaajat.size());
     }
-    
+
     @Test
-    public void seuraavaPelaajaToimii(){
+    public void vuoroSiirtyyOikein() {
+        peli.vuoroSiirtyy();
+        assertEquals(1, peli.vuorossa);
+    }
+
+    @Test
+    public void vuoroSiirtyyYliRajan() {
+        for (int i = 0; i < 5; i++) {
+            peli.vuoroSiirtyy();
+        }
+        assertEquals(0, peli.vuorossa);
+    }
+
+    @Test
+    public void seuraavaPelaajaToimii() {
         peli.setVuorossa(0);
         assertEquals(peli.pelaajat.get(1), peli.getSeuraavaPelaaja());
     }
-    
+
     @Test
-    public void kierrosPyorahtaaYmpari(){
-        peli.setVuorossa(peli.pelaajat.size()-1);
+    public void getPelaajaToimii() {
+        assertEquals(peli.getPelaaja(1), peli.pelaajat.get(1));
+    }
+
+    @Test
+    public void getPelaajaPyorahtaaYmpari() {
+        assertEquals(peli.getPelaaja(100), peli.pelaajat.get(0));
+    }
+
+    @Test
+    public void kierrosPyorahtaaYmpari() {
+        peli.setVuorossa(peli.pelaajat.size() - 1);
         assertEquals(peli.pelaajat.get(0), peli.getSeuraavaPelaaja());
     }
-    
+
     @Test
-    public void pelatutVuorotKasvavat(){
-        int testi = peli.pelattujaVuoroja;
+    public void pelatutVuorotKasvavat() {
         peli.pelaaVuoroTekstiKayttoLiittyma();
-        assertEquals(testi+1, peli.pelattujaVuoroja);
+        assertEquals(1, peli.pelattujaVuoroja);
     }
-    
+
     @Test
-    public void vuoroEiAsetuNegatiiviseksi(){
+    public void vuoroEiAsetuNegatiiviseksi() {
         int testi = peli.vuorossa;
         peli.setVuorossa(-1);
         assertEquals(testi, peli.vuorossa);
     }
-    
+
     @Test
-    public void vuoroEiAsetuPelaajamaaraaSuuremmaksi(){
+    public void vuoroEiAsetuPelaajamaaraaSuuremmaksi() {
         int testi = peli.vuorossa;
-        peli.setVuorossa(peli.pelaajat.size()+5);
+        peli.setVuorossa(peli.pelaajat.size() + 5);
         assertEquals(testi, peli.vuorossa);
+    }
+
+    @Test
+    public void pelaaVuoroGraafisessaLisaaPeliAikaa() {
+        peli.pelaaVuoroGraafisessa();
+        assertEquals(peli.getPelaaja(peli.vuorossa).peliAika.toString(), "00:00:01");
+    }
+
+    @Test
+    public void pelaaVuoroGraafisessaTosiJosAikaLoppui() {
+        for (int i = 0; i < 11; i++) {
+            peli.pelaaVuoroGraafisessa();
+        }
+        assertEquals(peli.aikaLoppui, true);
     }
 }

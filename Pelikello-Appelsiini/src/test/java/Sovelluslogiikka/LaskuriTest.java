@@ -18,102 +18,102 @@ import Sovelluslogiikka.Laskuri;
  * @author Kasperi
  */
 public class LaskuriTest {
-    
+
     public Laskuri laskija;
-    
+
     public LaskuriTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         laskija = new Laskuri(99, 50);
     }
-    
+
     @After
     public void tearDown() {
-   
+
     }
-    
+
     @Test
-    public void eiVoiAlustaaNegatiivistaArvoa(){
+    public void eiVoiAlustaaNegatiivistaArvoa() {
         Laskuri negatiivi = new Laskuri(59, -50);
         assertEquals(0, negatiivi.arvo);
     }
-    
+
     @Test
-    public void rajaEiVoiOllaNegatiivinen(){
+    public void rajaEiVoiOllaNegatiivinen() {
         Laskuri negatiivi = new Laskuri(-5, 10);
         assertEquals(0, negatiivi.raja);
     }
-    
+
     @Test
-    public void arvoEiVoiAlustaaRajaaSuuremmaksi(){
+    public void arvoEiVoiAlustaaRajaaSuuremmaksi() {
         Laskuri pieniraja = new Laskuri(5, 10);
         assertEquals(pieniraja.raja, pieniraja.arvo);
     }
-    
+
     @Test
-    public void arvoKasvaaEdetessa(){
+    public void arvoKasvaaEdetessa() {
         laskija.etene();
         assertEquals(51, laskija.arvo);
     }
-    
+
     @Test
-    public void rajallaEdetessaTuleeNolla(){                
-        for(int i=0; i<50; i++){
+    public void rajallaEdetessaTuleeNolla() {
+        for (int i = 0; i < 50; i++) {
             laskija.etene();
         }
         assertEquals(0, laskija.arvo);
     }
-    
+
     @Test
-    public void arvoPieneneeVahentyessa(){
+    public void arvoPieneneeVahentyessa() {
         laskija.vahene();
         assertEquals(49, laskija.arvo);
     }
-    
+
     @Test
-    public void nollassaVahentyessaTuleeRaja(){
-        for(int i=0; i<51; i++){
+    public void nollassaVahentyessaTuleeRaja() {
+        for (int i = 0; i < 51; i++) {
             laskija.vahene();
         }
         assertEquals(99, laskija.arvo);
     }
-    
+
     @Test
-    public void arvoAsettuuOikein(){
+    public void arvoAsettuuOikein() {
         laskija.setArvo(42);
         assertEquals(42, laskija.arvo);
     }
-    
+
     @Test
-    public void asettaessaNegatiivinenArvoTuleeNolla(){
+    public void asettaessaNegatiivinenArvoTuleeNolla() {
         laskija.setArvo(-7);
         assertEquals(0, laskija.arvo);
     }
-    
+
     @Test
-    public void eiVoiAsettaaRajaaSuurempaaArvoa(){
+    public void eiVoiAsettaaRajaaSuurempaaArvoa() {
         laskija.setArvo(100);
         assertEquals(laskija.raja, laskija.arvo);
     }
-    
+
     @Test
-    public void alleKympinArvoTulostuuOikein(){
+    public void alleKympinArvoTulostuuOikein() {
         laskija.setArvo(8);
         assertEquals("08", laskija.toString());
     }
-    
+
     @Test
-    public void yliKympinArvoTulostuuOikein(){
+    public void yliKympinArvoTulostuuOikein() {
         assertEquals("50", laskija.toString());
     }
 }

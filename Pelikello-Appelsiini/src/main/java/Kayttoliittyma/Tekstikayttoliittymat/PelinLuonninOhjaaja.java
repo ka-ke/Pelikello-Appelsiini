@@ -5,7 +5,6 @@
  */
 package Kayttoliittyma.Tekstikayttoliittymat;
 
-import Kayttoliittyma.Lukija;
 import Sovelluslogiikka.Ajastin;
 import Sovelluslogiikka.Pelaaja;
 import Sovelluslogiikka.Peli;
@@ -13,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Tekstikäyttöliittymällä käytettävä pelin luoja, ei käytössä GUI:n
+ * valmistuttua.
  *
  * @author Kasperi
  */
@@ -33,7 +34,7 @@ public class PelinLuonninOhjaaja {
 //        Ajastin aikaRajoitin = asetaAikaRajoitin();
         int vuoroRajoitin = asetaVuoroRajoitin() * pelaajat.size();
 
-        return new Peli(ajastin, pelaajat, vuoroRajoitin);
+        return new Peli(ajastin, pelaajat, vuoroRajoitin, null);
     }
 
     public Ajastin luoAjastin() {

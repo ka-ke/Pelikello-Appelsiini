@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Kolme laskuria sisältävä luokka, jonka avulla voidaan esittää kellonaikoja.
  * @author Kasperi
  */
 public class Ajastin {
@@ -20,9 +20,14 @@ public class Ajastin {
     int alkuTunnit;
     int alkuMinuutit;
     int alkuSekunnit;
-//    boolean kaynnissa;
     boolean testataan = false;
 
+    /**
+     * Konstruktori saa arvokseen ajankohdan, josta lähdetään mittaamaan aikaa.
+     * @param alkuTunnit
+     * @param alkuMinuutit
+     * @param alkuSekunnit
+     */
     public Ajastin(int alkuTunnit, int alkuMinuutit, int alkuSekunnit) {
         this.alkuTunnit = alkuTunnit;
         this.alkuMinuutit = alkuMinuutit;
@@ -30,13 +35,19 @@ public class Ajastin {
         tunnit = new Laskuri(23, alkuTunnit);
         minuutit = new Laskuri(59, alkuMinuutit);
         sekunnit = new Laskuri(59, alkuSekunnit);
-//        kaynnissa = true;
     }
 
+    /**
+     * Voidaan konstruktoida ilman tunteja käytännön syistä.
+     */
     public Ajastin(int alkuMinuutit, int alkuSekunnit) {
         this(-1, alkuMinuutit, alkuSekunnit);
     }
 
+    /**
+     * Vähentää aikaa sekunnilla. Jos pienempi ajanmääre pyörähtää ympäri,
+     * vähennetään myös suurempa ajanmäärettä.
+     */
     public void aikaKuluu() {
         // testiä ajettaessa ei tarvitse odottaa eikä graafisessa
 //        if (testataan == false) {
@@ -52,15 +63,22 @@ public class Ajastin {
             }
         }
     }
-    
-    public void aikaaMenee(){
-        if(sekunnit.etene()){
-            if(minuutit.etene()){
+
+    /**
+     * Lisää aikaa sekunnilla. Jos pienempi ajanmääre pyörähtää ympäri, lisätään
+     * myös suurempaa ajanmäärettä.
+     */
+    public void aikaaMenee() {
+        if (sekunnit.etene()) {
+            if (minuutit.etene()) {
                 tunnit.etene();
             }
         }
     }
 
+    /**
+     * Palauttaa ajastimen lähtöajankohtaansa.
+     */
     // keskeyttämistoiminnallisuus lisätään graafisen käyttöliittymän myötä
 //    public void keskeytaAjastus() {
 //        kaynnissa = false;
@@ -75,6 +93,9 @@ public class Ajastin {
         sekunnit.arvo = alkuSekunnit;
     }
 
+    /**
+     * Esittää ajastimen digitaalikellon tavoin.
+     */
     @Override
     public String toString() {
         if (alkuTunnit == -1) {

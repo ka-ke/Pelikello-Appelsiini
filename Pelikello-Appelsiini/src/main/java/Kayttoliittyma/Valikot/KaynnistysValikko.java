@@ -14,10 +14,12 @@ import javax.swing.*;
 import javax.swing.WindowConstants;
 
 /**
+ * Ensimmäinen ikkuna, joka avautuu ohjelman käynnistyessä. Navigoi joko uuteen
+ * peliin tai pelkkään ajanottoon.
  *
  * @author Kasperi
  */
-public class Kaynnistysvalikko implements Runnable {
+public class KaynnistysValikko implements Runnable {
 
     private JFrame laatikko;
 
@@ -34,6 +36,10 @@ public class Kaynnistysvalikko implements Runnable {
         laatikko.setVisible(true);
     }
 
+    /**
+     * Luo ikkunan sisällön ja asettaa painikkeet navigoimaan käyttäjän uusiin
+     * ikkunoihin.
+     */
     private void luoKomponentit(Container loota) {
 
         loota.setLayout(new GridLayout(2, 1));

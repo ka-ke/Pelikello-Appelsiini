@@ -13,3 +13,6 @@ Osan logiikasta voin siis toteuttaa paremmin kun olen saanut graafista puolta to
 käyttöliittymän luokista. Luon sovelluslogiikan luokille JUnit-testejä sekä parantelen koodia sieltä 
 sun täältä. Aloitan myös JavaDocin kirjoittamisen.
 13.2. 2h [Vanhempien luona] Koetan keretä työstämään hieman jotakin ennen deadlineä. Kiireisen viikon takia jäi javalabra hoitamatta tältä viikolta.
+18.2. 2h [Koti] Työstän GUI:ta, hieman nihkeästi etenee
+19.2. 8h [Koti] Työstän GUI:ta niin kauan kunnes se toimii ja aloita dokumentoinnin ym. dl kaman hoidon.
+20.2. 2h [Koti] Javadoc, testit, raportit, kaaviot parempaan kuntoon
