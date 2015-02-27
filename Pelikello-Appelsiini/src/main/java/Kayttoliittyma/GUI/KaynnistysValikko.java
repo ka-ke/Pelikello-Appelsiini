@@ -5,7 +5,6 @@
  */
 package Kayttoliittyma.GUI;
 
-import Domain.Aaniefektit.Aani;
 import Kayttoliittyma.GUIOhjain;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -25,7 +24,6 @@ import javax.swing.WindowConstants;
 public class KaynnistysValikko implements Runnable {
 
     private JFrame laatikko;
-    private Aani aani;
     private JPanel paneeli;
 
     @Override
