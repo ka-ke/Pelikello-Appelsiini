@@ -5,9 +5,9 @@
  */
 package Kayttoliittyma.Tekstikayttoliittymat;
 
-import Sovelluslogiikka.Ajastin;
-import Sovelluslogiikka.Pelaaja;
-import Sovelluslogiikka.Peli;
+import Domain.Ajastin;
+import Domain.Pelaaja;
+import Domain.Peli;
 import java.util.ArrayList;
 import java.util.List;
 

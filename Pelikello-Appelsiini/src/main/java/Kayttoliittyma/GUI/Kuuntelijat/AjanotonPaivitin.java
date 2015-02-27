@@ -5,29 +5,29 @@
  */
 package Kayttoliittyma.GUI.Kuuntelijat;
 
+import Domain.Ajastin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
+import javax.swing.JLabel;
 
 /**
- * Kuuntelija ajanoton pysäyttämistä varten.
  *
  * @author Kasperi
  */
-public class Pysaytin implements ActionListener {
+public class AjanotonPaivitin implements ActionListener {
 
-    Timer laukaisija;
-
-    public Pysaytin(Timer laukaisija) {
-        this.laukaisija = laukaisija;
+    JLabel paivitettava;
+    Ajastin ajastin;
+    
+    public AjanotonPaivitin(JLabel kuluvaAika, Ajastin ajastin) {
+        paivitettava = kuluvaAika;
+        this.ajastin = ajastin;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (laukaisija.isRunning()) {
-            laukaisija.stop();
-        } else {
-            laukaisija.start();
-        }
+        ajastin.aikaaMenee();
+        paivitettava.setText(ajastin.toString());
     }
+    
 }

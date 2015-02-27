@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma.Valikot;
+package Kayttoliittyma.GUI;
 
-import Sovelluslogiikka.Ajastin;
-import Sovelluslogiikka.Pelaaja;
-import Sovelluslogiikka.Peli;
+import Domain.Ajastin;
+import Domain.Pelaaja;
+import Domain.Peli;
+import Kayttoliittyma.GUI.Kuuntelijat.PelaajanLisays;
 import java.util.*;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -27,16 +28,16 @@ import javax.swing.WindowConstants;
  */
 public class LisaaPelaajat implements Runnable {
 
-    private JFrame laatikko;
-    List<Pelaaja> pelaajat;
-    Ajastin ajastin;
-    Ajastin aikaRaja;
-    int vuoroja;
-    int pelaajia;
-    int lisattava = 1;
-    IlmoitusLoota samaNimi;
-    IlmoitusLoota huonoNimi;
-    TextField nimiText;
+    public JFrame laatikko;
+    public List<Pelaaja> pelaajat;
+    public Ajastin ajastin;
+    public Ajastin aikaRaja;
+    public int vuoroja;
+    public int pelaajia;
+    public int lisattava = 1;
+    public IlmoitusLoota samaNimi;
+    public IlmoitusLoota huonoNimi;
+    public TextField nimiText;
     JLabel pelaajanNimi;
 
     /**
@@ -81,38 +82,10 @@ public class LisaaPelaajat implements Runnable {
         JButton lisaa = new JButton("Lisää");
         loota.add(lisaa);
 
-        lisaa.addActionListener(lisaaPelaaja);
+        lisaa.addActionListener(new PelaajanLisays(this));
     }
-    /**
-     * Kuuntelija lisää pelaajan listaan, jos nimimerkki ei ole käytössä ja ei
-     * ole tyhjä.
-     */
-    ActionListener lisaaPelaaja = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String nimi = nimiText.getText().trim();
-
-            if (nimi.isEmpty()) {
-                huonoNimi.setVisible(true);
-                return;
-            }
-
-            for (Pelaaja p : pelaajat) {
-                if (p.nimi.equals(nimi)) {
-                    samaNimi.setVisible(true);
-                    return;
-                }
-            }
-
-            pelaajat.add(new Pelaaja(nimi, lisattava));
-            nimiText.setText("");
-            lisattava++;
-
-            if (lisattava > pelaajia) {
-                laatikko.setVisible(false);
-                PeliRuutu peliruutu = new PeliRuutu(new Peli(ajastin, pelaajat, vuoroja, aikaRaja));
-                peliruutu.run();
-            }
-        }
-    };
+    
+    public void piilota(boolean b) {
+        laatikko.setVisible(b);
+    }
 }

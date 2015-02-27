@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Aaniefektit;
+package Domain.Aaniefektit;
 import java.applet.Applet;
 import java.applet.AudioClip;
 /**
@@ -12,7 +12,8 @@ import java.applet.AudioClip;
  */
 public class Aani {
     
-    public static final Aani aani1 = new Aani("/Users/Kasperi/Pelikello-Appelsiini/Pelikello-Appelsiini/src/main/resources/sounds/Blip.wav");
+    public static final Aani aikaVahenee = new Aani("/sounds/pling.wav");
+    public static final Aani aikaLoppui = new Aani("/sounds/pliiing.wav");
     AudioClip raita;
     
     public Aani(String tiedosto){

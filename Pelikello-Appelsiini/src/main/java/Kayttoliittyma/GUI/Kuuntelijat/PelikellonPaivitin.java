@@ -3,37 +3,49 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma.Valikot.Kuuntelijat;
+package Kayttoliittyma.GUI.Kuuntelijat;
 
-import Sovelluslogiikka.Ajastin;
-import Sovelluslogiikka.Peli;
+import Domain.Aaniefektit.Aani;
+import Domain.Ajastin;
+import Domain.Peli;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+
 /**
- * Kuuntelija ajan digitaaliesityksen reaaliaikaista päivittämistä varten.
+ * Kuuntelija pelin ajan digitaaliesityksen reaaliaikaista päivittämistä varten.
+ *
  * @author Kasperi
  */
-public class Paivitin implements ActionListener {
+public class PelikellonPaivitin implements ActionListener {
 
     private Peli peli;
     private JLabel label;
-/**
+
+    /**
      * @param label Sisältää päivitettävän kellonajan digitaaliesityksen.
      * @param peli Peli, jonka ajanottoa käsitellään.
- */
-    public Paivitin(JLabel label, Peli peli) {
+     */
+    public PelikellonPaivitin(JLabel label, Peli peli) {
         this.label = label;
         this.peli = peli;
     }
-/**
- * Kutsuu pelin metodia ajastimen edistämiseksi ja päivittää digitaaliesityksen.
- */
+
+    /**
+     * Kutsuu pelin metodia ajastimen edistämiseksi ja päivittää
+     * digitaaliesityksen.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!peli.ajastin.toString().equals("00:00")) {
+        if (!peli.ajastin.toString().equals("00:00")) {
             peli.pelaaVuoroGraafisessa();
+            if (peli.ajastin.toString().equals("00:00")) {
+                Aani.aikaLoppui.toista();
+            } else if (peli.ajastin.minuutit.arvo == 0 && peli.ajastin.sekunnit.arvo <= 5) {
+                Aani.aikaVahenee.toista();
+            }
             label.setText("" + peli.ajastin.toString());
+
         }
     }
 }

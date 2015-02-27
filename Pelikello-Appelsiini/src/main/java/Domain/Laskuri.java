@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sovelluslogiikka;
+package Domain;
 
 /**
  * Luokka, joka ylläpitää ylhäältä vapaasti valitusta sekä alhaalta nollasta

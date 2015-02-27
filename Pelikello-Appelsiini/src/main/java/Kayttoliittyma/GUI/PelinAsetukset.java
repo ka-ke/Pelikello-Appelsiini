@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma.Valikot;
+package Kayttoliittyma.GUI;
 
-import Sovelluslogiikka.Ajastin;
-import Sovelluslogiikka.Pelaaja;
-import Sovelluslogiikka.Peli;
+import Kayttoliittyma.GUI.Kuuntelijat.AsetustenTallennus;
+import Domain.Ajastin;
+import Domain.Pelaaja;
+import Domain.Peli;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -28,14 +29,14 @@ import javax.swing.WindowConstants;
  */
 public class PelinAsetukset implements Runnable {
 
-    private JFrame laatikko;
-    IlmoitusLoota virhe;
-    TextField pelaajiaText;
-    TextField vuorojaText;
-    TextField sek;
-    TextField min;
-    TextField sekAika;
-    TextField minAika;
+    public JFrame laatikko;
+    public IlmoitusLoota virhe;
+    public TextField pelaajiaText;
+    public TextField vuorojaText;
+    public TextField sek;
+    public TextField min;
+    public TextField sekAika;
+    public TextField minAika;
 
     @Override
     public void run() {
@@ -73,7 +74,7 @@ public class PelinAsetukset implements Runnable {
         JLabel tyhja1 = new JLabel("");
         JLabel tyhja2 = new JLabel("");
 
-        jatka.addActionListener(pelaajanLisaykseen);
+        jatka.addActionListener(new AsetustenTallennus(this));
 
         loota.add(paljonkoAikaa);
         loota.add(min);
@@ -89,53 +90,8 @@ public class PelinAsetukset implements Runnable {
         loota.add(tyhja2);
         loota.add(jatka);
     }
-    /**
-     * Tallentaa valikkoon syötetyt asetukset ja navigoi seuraavaan valikkoon.
-     * Luo virheviestilaatikoita, mikäli syöte ei ole oikeanlaista.
-     */
-    ActionListener pelaajanLisaykseen = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int vuoroja;
-            int pelaajia;
-
-            try {
-                vuoroja = Integer.parseInt(vuorojaText.getText());
-                pelaajia = Integer.parseInt(pelaajiaText.getText());
-            } catch (Exception ex) {
-                virhe.setVisible(true);
-                return;
-            }
-            if (pelaajia < 1) {
-                virhe.setVisible(true);
-                return;
-            }
-            if (vuoroja < 0) {
-                virhe.setVisible(true);
-                return;
-            }
-
-            Ajastin ajastin;
-            Ajastin aikaRaja;
-            try {
-                ajastin = new Ajastin(Integer.parseInt(min.getText()), Integer.parseInt(sek.getText()));
-                aikaRaja = new Ajastin(Integer.parseInt(minAika.getText()),
-                        Integer.parseInt(sekAika.getText()));
-            } catch (Exception ex) {
-                virhe.setVisible(true);
-                return;
-            }
-            if (ajastin.toString().equals("00:00")) {
-                virhe.setVisible(true);
-                return;
-            }
-
-            List<Pelaaja> pelaajat = new ArrayList();
-            LisaaPelaajat lisaaPelaajat = new LisaaPelaajat(pelaajat, ajastin, vuoroja, aikaRaja,
-                    pelaajia);
-
-            laatikko.setVisible(false);
-            lisaaPelaajat.run();
-        }
-    };
+    
+    public void piilota(boolean b) {
+        laatikko.setVisible(b);
+    }
 }

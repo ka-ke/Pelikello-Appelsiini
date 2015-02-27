@@ -5,10 +5,9 @@
  */
 package Kayttoliittyma;
 
+import Domain.Aaniefektit.Aani;
 import Kayttoliittyma.*;
-import Sovelluslogiikka.*;
-import Aaniefektit.*;
-import Kayttoliittyma.Valikot.KaynnistysValikko;
+import Kayttoliittyma.GUI.KaynnistysValikko;
 
 /**
  *
@@ -18,21 +17,10 @@ public class Main {
 
     private Aani aani;
 
-    public void start() {
-        init();
-        new Thread((Runnable) this).start();
-    }
-
-    public void init() {
-        Aani.aani1.toista();
-    }
-
     public static void main(String[] args) {
 
-        KaynnistysValikko k = new KaynnistysValikko();
-        k.run();
+        GUIOhjain.kaynnisty();
 
-        // /Users/Kasperi/Pelikello-Appelsiini/Pelikello-Appelsiini/src/main/resources/sounds/Blip.wav        
 //        Lukija lukija = new Lukija();
 //        PelinLuonninOhjaaja pelinLuoja = new PelinLuonninOhjaaja(lukija);
 //        Peli peli = pelinLuoja.luoPeli();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma.Valikot;
+package Kayttoliittyma.GUI;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -21,7 +21,7 @@ import javax.swing.JLabel;
  */
 public class IlmoitusLoota implements Runnable {
 
-    private JFrame virhe;
+    private JFrame ilmoitus;
     String viesti;
 
     /**
@@ -34,13 +34,13 @@ public class IlmoitusLoota implements Runnable {
     @Override
     public void run() {
 
-        virhe = new JFrame("Virheilmoitus");
-        virhe.setPreferredSize(new Dimension(200, 150));
+        ilmoitus = new JFrame("Ilmoitus");
+        ilmoitus.setPreferredSize(new Dimension(200, 150));
 
-        luoKomponentit(virhe.getContentPane());
+        luoKomponentit(ilmoitus.getContentPane());
 
-        virhe.pack();
-        virhe.setVisible(false);
+        ilmoitus.pack();
+        ilmoitus.setVisible(false);
     }
 
     /**
@@ -54,7 +54,7 @@ public class IlmoitusLoota implements Runnable {
         ActionListener ok = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                virhe.setVisible(false);
+                ilmoitus.setVisible(false);
             }
         };
         virheOk.addActionListener(ok);
@@ -63,11 +63,11 @@ public class IlmoitusLoota implements Runnable {
         loota.add(virheOk);
     }
 
-    public void setVisible(boolean b) {
-        virhe.setVisible(b);
+    public void piilota(boolean b) {
+        ilmoitus.setVisible(b);
     }
 
-    boolean getVisible() {
-        return virhe.isVisible();
+    public boolean nakyy() {
+        return ilmoitus.isVisible();
     }
 }

@@ -5,7 +5,8 @@
  */
 package Kayttoliittyma.Tekstikayttoliittymat;
 
-import Sovelluslogiikka.*;
+import Domain.Peli;
+import Domain.Pelaaja;
 
 /**
  * Tekstikäyttöliittymässä pelin etenemistä ohjaava luokka. Ei enää käytössä

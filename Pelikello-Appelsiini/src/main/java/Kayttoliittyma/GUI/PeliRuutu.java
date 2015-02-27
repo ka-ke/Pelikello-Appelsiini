@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma.Valikot;
+package Kayttoliittyma.GUI;
 
-import Kayttoliittyma.Valikot.Kuuntelijat.Paivitin;
-import Kayttoliittyma.Valikot.Kuuntelijat.Pysaytin;
-import Sovelluslogiikka.Peli;
+import Kayttoliittyma.GUI.Kuuntelijat.PelikellonPaivitin;
+import Kayttoliittyma.GUI.Kuuntelijat.Pysaytin;
+import Domain.Peli;
+import Kayttoliittyma.GUI.Kuuntelijat.SeuraavaVuoro;
+import Kayttoliittyma.GUIOhjain;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -28,16 +30,14 @@ public class PeliRuutu implements Runnable {
     JFrame aloitus;
     Peli peli;
     int vuoro = 0;
-    JLabel aika;
-    JLabel vuorotieto;
-    Paivitin paivitin;
-    IlmoitusLoota aikaLoppui;
-    Timer timer;
+    public JLabel aika;
+    public JLabel vuorotieto;
+    public IlmoitusLoota aikaLoppui;
+    public Timer laukaisija;
 
     public PeliRuutu(Peli peli) {
         this.peli = peli;
     }
-
     /**
      * Alustaa ikkunat sekä ajan digitaaliesityksen päivittämistä varten
      * tarvittavat työkalut.
@@ -51,12 +51,12 @@ public class PeliRuutu implements Runnable {
         laatikko.pack();
         laatikko.setVisible(false);
 
-        paivitin = new Paivitin(aika, peli);
-        timer = new Timer(1000, paivitin);
+        PelikellonPaivitin paivitin = new PelikellonPaivitin(aika, peli);
+        laukaisija = new Timer(1000, paivitin);
 
         aloitus = new JFrame("Peli alkaa!");
         aloitus.setPreferredSize(new Dimension(300, 200));
-        luoAloitus(aloitus.getContentPane());
+        luoAloitusLaatikko(aloitus.getContentPane());
 
         aloitus.pack();
         aloitus.setVisible(true);
@@ -68,7 +68,7 @@ public class PeliRuutu implements Runnable {
     /**
      * Alustaa ilmoitusikkunan, joka aloittaa pelin painikkeella.
      */
-    private void luoAloitus(Container loota) {
+    private void luoAloitusLaatikko(Container loota) {
         loota.setLayout(new GridLayout(2, 1));
 
         loota.add(new JLabel("Pelin aloittaa " + peli.getPelaaja(peli.vuorossa).nimi));
@@ -79,7 +79,7 @@ public class PeliRuutu implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 aloitus.setVisible(false);
                 laatikko.setVisible(true);
-                timer.start();
+                laukaisija.start();
             }
         };
         ok.addActionListener(okPainike);
@@ -92,25 +92,14 @@ public class PeliRuutu implements Runnable {
     private void luoKomponentit(Container loota) {
 
         aika = new JLabel(peli.ajastin.toString());
-        vuorotieto = new JLabel(((peli.pelattujaVuoroja + peli.pelaajat.size()) / peli.pelaajat.size())
-                + ". kierros, VUOROSSA: " + peli.getPelaaja(peli.vuorossa).nimi
-                + " SEURAAVAKSI: " + peli.getSeuraavaPelaaja().nimi);
+        vuorotieto = new JLabel();
+        setVuorotieto();        
 
         JButton seuraava = new JButton("Aloita seuraavan pelaajan vuoro");
-        seuraava.addActionListener(seuraavaVuoroNappi);
+        seuraava.addActionListener(new SeuraavaVuoro(this, peli));
 
         JButton stop = new JButton("ON/OFF");
-        ActionListener stopperi = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (timer.isRunning()) {
-                    timer.stop();
-                } else {
-                    timer.start();
-                }
-            }
-        };
-        stop.addActionListener(stopperi);
+        stop.addActionListener(new Pysaytin(laukaisija));
 
         JButton lopeta = new JButton("Lopeta peli");
         ActionListener lopetaPeli = new ActionListener() {
@@ -128,41 +117,9 @@ public class PeliRuutu implements Runnable {
         loota.add(lopeta, BorderLayout.SOUTH);
     }
     /**
-     * Kuuntelija sisältää toiminnallisuuden vuoron siirtymistä varten sekä
-     * vuorojen välissä tapahtuvat muutokset pelissä.
-     */
-    ActionListener seuraavaVuoroNappi = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            peli.pelattujaVuoroja++;
-            peli.vuoroSiirtyy();
-            if (peli.pelattujaVuoroja == peli.vuoroRaja * peli.pelaajat.size()) {
-                loppuTuloksiin();
-            } else if (peli.pelattujaVuoroja == peli.vuoroRaja * peli.pelaajat.size() - 1) {
-                vuorotieto.setText(((peli.pelattujaVuoroja + peli.pelaajat.size()) / peli.pelaajat.size())
-                        + ". kierros, VUOROSSA: " + peli.getPelaaja(peli.vuorossa).nimi
-                        + " VIIMEINEN VUORO!");
-            } else {
-                setVuorotieto();
-            }
-
-            peli.ajastin.alustaAjastin();
-            aika.setText(peli.ajastin.toString());
-            if (!timer.isRunning()) {
-                timer.start();
-            }
-            if (peli.aikaLoppui) {
-                loppuTuloksiin();
-                aikaLoppui.setVisible(true);
-            }
-        }
-
-    };
-
-    /**
      * Asettaa vuorotieto-tekstille tiedot nykyisestä vuorosta.
      */
-    private void setVuorotieto() {
+    public void setVuorotieto() {
         vuorotieto.setText(((peli.pelattujaVuoroja + peli.pelaajat.size()) / peli.pelaajat.size())
                 + ". kierros, VUOROSSA: " + peli.getPelaaja(peli.vuorossa).nimi
                 + " SEURAAVAKSI: " + peli.getSeuraavaPelaaja().nimi);
@@ -172,8 +129,10 @@ public class PeliRuutu implements Runnable {
      * Navigoi käyttäjän pois peli ruudusta lopputulosikkunaan.
      */
     public void loppuTuloksiin() {
-        laatikko.setVisible(false);
-        Lopputulokset lopputulokset = new Lopputulokset(peli);
-        lopputulokset.run();
+        GUIOhjain.lopetaPeli(peli);
+    }
+    
+    public void piilota(boolean b) {
+        laatikko.setVisible(b);
     }
 }

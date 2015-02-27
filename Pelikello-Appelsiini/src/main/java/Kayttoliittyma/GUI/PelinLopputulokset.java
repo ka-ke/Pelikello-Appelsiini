@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Kayttoliittyma.Valikot;
+package Kayttoliittyma.GUI;
 
-import Sovelluslogiikka.Pelaaja;
-import Sovelluslogiikka.Peli;
+import Domain.Pelaaja;
+import Domain.Peli;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -18,7 +18,7 @@ import javax.swing.*;
  *
  * @author Kasperi
  */
-public class Lopputulokset {
+public class PelinLopputulokset implements Runnable {
 
     Peli peli;
     JFrame laatikko;
@@ -26,11 +26,12 @@ public class Lopputulokset {
     /**
      * @param peli Saa tiedot pelistä.
      */
-    public Lopputulokset(Peli peli) {
+    public PelinLopputulokset(Peli peli) {
         this.peli = peli;
     }
 
-    void run() {
+    @Override
+    public void run() {
         laatikko = new JFrame("Kulutettu peliaika");
         laatikko.setPreferredSize(new Dimension(300, 200));
 
@@ -64,7 +65,11 @@ public class Lopputulokset {
     ActionListener lopetaPeli = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            laatikko.setVisible(false);
+            piilota(false);
         }
     };
+    
+    public void piilota(boolean b) {
+        laatikko.setVisible(b);
+    }
 }
