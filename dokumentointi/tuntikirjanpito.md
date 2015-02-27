@@ -13,6 +13,11 @@ Osan logiikasta voin siis toteuttaa paremmin kun olen saanut graafista puolta to
 käyttöliittymän luokista. Luon sovelluslogiikan luokille JUnit-testejä sekä parantelen koodia sieltä 
 sun täältä. Aloitan myös JavaDocin kirjoittamisen.
 13.2. 2h [Vanhempien luona] Koetan keretä työstämään hieman jotakin ennen deadlineä. Kiireisen viikon takia jäi javalabra hoitamatta tältä viikolta.
-18.2. 2h [Koti] Työstän GUI:ta, hieman nihkeästi etenee
+18.2. 2h [Koti] Työstän GUI:ta, hieman nihkeästi etenee.
 19.2. 8h [Koti] Työstän GUI:ta niin kauan kunnes se toimii ja aloita dokumentoinnin ym. dl kaman hoidon.
-20.2. 2h [Koti] Javadoc, testit, raportit, kaaviot parempaan kuntoon
+20.2. 2h [Koti] Javadoc, testit, raportit, kaaviot parempaan kuntoon.
+24.2. 1h [Paja] Sain pajan avulla ääniefektit toimimaan sekä apua käyttöliittymän ja logiikan eriyttämiseksi.
+25.2. 2h [Koti] Äänten koodaaminen tarkoituksenmukaiseksi ja työskentelyä käyttöliittymäsotkun kanssa.
+26.2. 4h [Koti] Käyttöliittymän rakenteen muokkausta logiikan eriyttämiseksi. GUIOhjain luokka sekä toiminallisuus 
+ajanottoa varten.
+27.2. 7h [Koti] Demokuntoon aamulla ja illalla raivokasta valmistelua viimeiseen dl:ään.

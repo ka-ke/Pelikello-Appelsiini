@@ -9,17 +9,22 @@ import Domain.Ajastin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 
 /**
+ * Kuuntelija ajanoton ajan tallennusta varten.
  *
  * @author Kasperi
  */
 public class AjanTallennus implements ActionListener {
 
-    ArrayList<String> ajat;
-    Ajastin ajastin;
-    
+    private ArrayList<String> ajat;
+    private Ajastin ajastin;
+
+    /**
+     *
+     * @param ajat Lista aikoja.
+     * @param ajastin Ajastin, jonka tämänhetkinen aika tallennetaan.
+     */
     public AjanTallennus(ArrayList<String> ajat, Ajastin ajastin) {
         this.ajat = ajat;
         this.ajastin = ajastin;

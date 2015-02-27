@@ -29,7 +29,7 @@ public class Pelaaja implements Comparable<Pelaaja> {
 
         this.nimi = nimi;
         vuoro = vuoroNumero;
-        peliAika = new Ajastin(0, 0, 0);
+        peliAika = new Ajastin(0, 0);
     }
 
     /**
@@ -68,7 +68,6 @@ public class Pelaaja implements Comparable<Pelaaja> {
      * digitaaliesityksenä.
      */
     public String getPeliAika() {
-        return peliAika.tunnit.toString() + ":"
-                + peliAika.minuutit.toString() + ":" + peliAika.sekunnit.toString();
+        return peliAika.minuutit.toString() + ":" + peliAika.sekunnit.toString();
     }
 }

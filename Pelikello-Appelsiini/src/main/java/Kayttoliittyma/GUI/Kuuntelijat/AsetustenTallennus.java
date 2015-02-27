@@ -5,24 +5,27 @@
  */
 package Kayttoliittyma.GUI.Kuuntelijat;
 
-import Kayttoliittyma.GUI.LisaaPelaajat;
 import Kayttoliittyma.GUI.PelinAsetukset;
 import Domain.Ajastin;
 import Domain.Pelaaja;
 import Kayttoliittyma.GUIOhjain;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
+ * Kuuntelija peliasetusten lukemista varten.
  *
  * @author Kasperi
  */
 public class AsetustenTallennus implements ActionListener {
 
-    PelinAsetukset asetukset;
+    private PelinAsetukset asetukset;
 
+    /**
+     *
+     * @param asetukset Asetukset PeliAsetuksista.
+     */
     public AsetustenTallennus(PelinAsetukset asetukset) {
         this.asetukset = asetukset;
     }
@@ -36,15 +39,19 @@ public class AsetustenTallennus implements ActionListener {
             vuoroja = Integer.parseInt(asetukset.vuorojaText.getText());
             pelaajia = Integer.parseInt(asetukset.pelaajiaText.getText());
         } catch (Exception ex) {
-            asetukset.virhe.piilota(true);
+            asetukset.virhe.nayta(true);
             return;
         }
         if (pelaajia < 1) {
-            asetukset.virhe.piilota(true);
+            asetukset.virhe.nayta(true);
+            return;
+        }
+        if (pelaajia > 10) {
+            asetukset.virhe.nayta(true);
             return;
         }
         if (vuoroja < 0) {
-            asetukset.virhe.piilota(true);
+            asetukset.virhe.nayta(true);
             return;
         }
 
@@ -57,11 +64,11 @@ public class AsetustenTallennus implements ActionListener {
             peliAjastin = new Ajastin(Integer.parseInt(asetukset.minAika.getText()),
                     Integer.parseInt(asetukset.sekAika.getText()));
         } catch (Exception ex) {
-            asetukset.virhe.piilota(true);
+            asetukset.virhe.nayta(true);
             return;
         }
         if (vuoroAjastin.toString().equals("00:00")) {
-            asetukset.virhe.piilota(true);
+            asetukset.virhe.nayta(true);
             return;
         }
 

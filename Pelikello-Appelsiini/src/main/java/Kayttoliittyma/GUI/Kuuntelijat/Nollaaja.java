@@ -8,25 +8,36 @@ package Kayttoliittyma.GUI.Kuuntelijat;
 import Domain.Ajastin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 /**
+ * Kuuntelija ajanoton nollausta varten.
  *
  * @author Kasperi
  */
 public class Nollaaja implements ActionListener {
 
-    Ajastin ajastin;
-    JLabel kuluvaAika;
-    
-    public Nollaaja(Ajastin ajastin, JLabel kuluvaAika){
+    private Ajastin ajastin;
+    private JLabel kuluvaAika;
+    private Timer laukaisin;
+
+    /**
+     *
+     * @param ajastin Ajastin, jonka aika nollataan.
+     * @param kuluvaAika Tekstilaatikko, jonka sisältö päivitetään.
+     * @param laukaisin Pysäytettävä laukaisin.
+     */
+    public Nollaaja(Ajastin ajastin, JLabel kuluvaAika, Timer laukaisin) {
         this.ajastin = ajastin;
         this.kuluvaAika = kuluvaAika;
+        this.laukaisin = laukaisin;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        laukaisin.stop();
         ajastin.alustaAjastin();
         kuluvaAika.setText(ajastin.toString());
+
     }
 }

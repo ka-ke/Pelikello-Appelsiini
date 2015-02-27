@@ -7,18 +7,10 @@ package Kayttoliittyma.GUI;
 
 import Domain.Ajastin;
 import Domain.Pelaaja;
-import Domain.Peli;
 import Kayttoliittyma.GUI.Kuuntelijat.PelaajanLisays;
 import java.util.*;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javafx.scene.control.CheckBox;
+import java.awt.*;
 import javax.swing.*;
-import javax.swing.WindowConstants;
 
 /**
  * Asetusten jälkeen seuraava ikkuna, jonka avulla lisätään valittu määrä
@@ -29,7 +21,7 @@ import javax.swing.WindowConstants;
 public class LisaaPelaajat implements Runnable {
 
     public JFrame laatikko;
-    public List<Pelaaja> pelaajat;
+    public ArrayList<Pelaaja> pelaajat;
     public Ajastin ajastin;
     public Ajastin aikaRaja;
     public int vuoroja;
@@ -38,12 +30,18 @@ public class LisaaPelaajat implements Runnable {
     public IlmoitusLoota samaNimi;
     public IlmoitusLoota huonoNimi;
     public TextField nimiText;
-    JLabel pelaajanNimi;
+    private JLabel pelaajanNimi;
 
     /**
      * Parametreina annetaan pelin luomiseen tarvittavat tiedot asetusvalikosta.
+     *
+     * @param pelaajat Tyhjä lista pelaajista.
+     * @param ajastin Asetuksissa luotu vuoroaikaraja-ajastin.
+     * @param vuoroja Asetuksissa määrätty vuororaja.
+     * @param aikaRaja Asetuksissa luotu peliaikaraja-ajastin.
+     * @param pelaajia Asetuksissa määrätty pelaajamäärä.
      */
-    public LisaaPelaajat(List<Pelaaja> pelaajat, Ajastin ajastin, int vuoroja, Ajastin aikaRaja, int pelaajia) {
+    public LisaaPelaajat(ArrayList<Pelaaja> pelaajat, Ajastin ajastin, int vuoroja, Ajastin aikaRaja, int pelaajia) {
         this.pelaajat = pelaajat;
         this.ajastin = ajastin;
         this.vuoroja = vuoroja;
@@ -55,12 +53,12 @@ public class LisaaPelaajat implements Runnable {
     public void run() {
 
         laatikko = new JFrame("Lisää pelaaja");
-        laatikko.setPreferredSize(new Dimension(300, 200));
+        laatikko.setPreferredSize(new Dimension(200, 200));
 
         luoKomponentit(laatikko.getContentPane());
 
         laatikko.pack();
-        laatikko.setVisible(true);
+        nayta(true);
 
         samaNimi = new IlmoitusLoota("Et voi valita samaa nimeä uudestaan");
         huonoNimi = new IlmoitusLoota("Laitapas joku kunnon nimi");
@@ -68,12 +66,9 @@ public class LisaaPelaajat implements Runnable {
         huonoNimi.run();
     }
 
-    /**
-     * Asetetaan ikkunan sisältö ja toiminnallisuus lisää-painikkeelle.
-     */
     private void luoKomponentit(final Container loota) {
 
-        loota.setLayout(new GridLayout(2, 2));
+        loota.setLayout(new GridLayout(2, 2, 5, 5));
 
         pelaajanNimi = new JLabel("Lisättävän pelaajan nimi:");
         loota.add(pelaajanNimi);
@@ -84,8 +79,13 @@ public class LisaaPelaajat implements Runnable {
 
         lisaa.addActionListener(new PelaajanLisays(this));
     }
-    
-    public void piilota(boolean b) {
-        laatikko.setVisible(b);
+
+    /**
+     * GUIOhjaimen käyttämä luokka Ajanotto-ikkunan näkyvyyden määrittämiseksi.
+     *
+     * @param nakyy true jos näkyy, false mikäli ei.
+     */
+    public void nayta(boolean nakyy) {
+        laatikko.setVisible(nakyy);
     }
 }

@@ -9,6 +9,7 @@ import Domain.Aaniefektit.Aani;
 import Kayttoliittyma.GUIOhjain;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,7 @@ import javax.swing.WindowConstants;
 
 /**
  * Ensimmäinen ikkuna, joka avautuu ohjelman käynnistyessä. Navigoi joko uuteen
- * peliin tai pelkkään ajanottoon.
+ * peliin tai ajanottoon.
  *
  * @author Kasperi
  */
@@ -25,25 +26,21 @@ public class KaynnistysValikko implements Runnable {
 
     private JFrame laatikko;
     private Aani aani;
+    private JPanel paneeli;
 
     @Override
     public void run() {
 
         laatikko = new JFrame("Pelikello-Appelsiini");
         laatikko.setPreferredSize(new Dimension(300, 400));
-
         laatikko.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         luoKomponentit(laatikko.getContentPane());
 
         laatikko.pack();
-        laatikko.setVisible(true);
+        nayta(true);
     }
 
-    /**
-     * Luo ikkunan sisällön ja asettaa painikkeet navigoimaan käyttäjän uusiin
-     * ikkunoihin.
-     */
     private void luoKomponentit(Container loota) {
 
         loota.setLayout(new GridLayout(2, 1));
@@ -65,11 +62,16 @@ public class KaynnistysValikko implements Runnable {
             }
         });
 
-        loota.add(aloita);
-        loota.add(aikaa);
+        laatikko.add(aloita);
+        laatikko.add(aikaa);
     }
 
-    public void piilota(boolean b) {
-        laatikko.setVisible(b);
+    /**
+     * GUIOhjaimen käyttämä luokka Ajanotto-ikkunan näkyvyyden määrittämiseksi.
+     *
+     * @param nakyy true jos näkyy, false mikäli ei.
+     */
+    public void nayta(boolean nakyy) {
+        laatikko.setVisible(nakyy);
     }
 }

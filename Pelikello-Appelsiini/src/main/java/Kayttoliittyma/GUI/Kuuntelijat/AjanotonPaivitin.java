@@ -11,14 +11,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 /**
+ * Kuuntelija ajanoton kuluvaAika-tekstilaatikon päivittämiselle.
  *
  * @author Kasperi
  */
 public class AjanotonPaivitin implements ActionListener {
 
-    JLabel paivitettava;
-    Ajastin ajastin;
-    
+    private JLabel paivitettava;
+    private Ajastin ajastin;
+
+    /**
+     *
+     * @param kuluvaAika Päivitettävä tekstilaatikko.
+     * @param ajastin Ajastin, jonka aika päivitetään tekstilaatikkoon.
+     */
     public AjanotonPaivitin(JLabel kuluvaAika, Ajastin ajastin) {
         paivitettava = kuluvaAika;
         this.ajastin = ajastin;
@@ -29,5 +35,5 @@ public class AjanotonPaivitin implements ActionListener {
         ajastin.aikaaMenee();
         paivitettava.setText(ajastin.toString());
     }
-    
+
 }

@@ -5,22 +5,25 @@
  */
 package Kayttoliittyma.GUI;
 
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
 /**
+ * Ikkuna, joka näyttää ajanotossa tallennetut tulokset yhteenvetona.
  *
  * @author Kasperi
  */
 public class AjanotonTulokset implements Runnable {
 
-    ArrayList ajat;
-    JFrame laatikko;
+    private ArrayList ajat;
+    private JFrame laatikko;
 
+    /**
+     * @param ajat Lista tallenetuista ajoista.
+     */
     public AjanotonTulokset(ArrayList<String> ajat) {
         this.ajat = ajat;
     }
@@ -32,29 +35,46 @@ public class AjanotonTulokset implements Runnable {
         luoKomponentit(laatikko.getContentPane());
 
         laatikko.pack();
-        laatikko.setVisible(true);
+        nayta(true);
     }
 
     private void luoKomponentit(Container loota) {
 
-        BoxLayout y = new BoxLayout(loota, BoxLayout.Y_AXIS);
-        loota.setLayout(y);
+        JPanel ylaosa = new JPanel();
+        JPanel alaosa = new JPanel();
+        ylaosa.setLayout(new GridLayout(1, 2));
+        alaosa.setLayout(new GridLayout(10, 5));
 
-        JLabel teksti = new JLabel("Aikasi pienimmästä suurimpaan:");
-        loota.add(teksti);
+        JLabel teksti = new JLabel("Alla top50 parasta aikaasi", JLabel.CENTER);
 
-        for (Object aika : ajat) {
-            loota.add(new JLabel("" + aika));
+        for (int i = 1; i < ajat.size(); i++) {
+            alaosa.add(new JLabel("" + ajat.get(i)));
+            if (i == 50) {
+                break;
+            }
         }
 
-        JButton lopeta = new JButton("Kiitos tiedosta ja näkemiin");
+        JButton lopeta = new JButton("Palaa käynnistysvalikkoon");
         lopeta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                laatikko.setVisible(false);
+                nayta(false);
             }
         });
 
-        loota.add(lopeta);
+        ylaosa.add(teksti);
+        ylaosa.add(lopeta);
+
+        loota.add(ylaosa, BorderLayout.NORTH);
+        loota.add(alaosa, BorderLayout.CENTER);
+    }
+    
+    /**
+     * GUIOhjaimen käyttämä luokka Ajanotto-ikkunan näkyvyyden määrittämiseksi.
+     *
+     * @param nakyy true jos näkyy, false mikäli ei.
+     */
+    public void nayta(boolean nakyy) {
+        laatikko.setVisible(nakyy);
     }
 }

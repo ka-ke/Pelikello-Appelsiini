@@ -8,19 +8,25 @@ package Kayttoliittyma.GUI.Kuuntelijat;
 import Domain.Pelaaja;
 import Domain.Peli;
 import Kayttoliittyma.GUI.LisaaPelaajat;
-import Kayttoliittyma.GUI.PeliRuutu;
 import Kayttoliittyma.GUIOhjain;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Kuuntelija, joka Lisaapelaajat-ikkunan painikkeelle toiminnallisuuden lisätä
+ * nimimerkkejä Pelaajalistaan.
  *
  * @author Kasperi
  */
 public class PelaajanLisays implements ActionListener {
 
-    LisaaPelaajat asetukset;
+    private LisaaPelaajat asetukset;
 
+    /**
+     *
+     * @param asetukset LisaaPelaajat ikkuna asetuksineen, jotta voidaan
+     * palauttaa Peli GUIOhjaimelle.
+     */
     public PelaajanLisays(LisaaPelaajat asetukset) {
         this.asetukset = asetukset;
     }
@@ -30,13 +36,13 @@ public class PelaajanLisays implements ActionListener {
         String nimi = asetukset.nimiText.getText().trim();
 
         if (nimi.isEmpty()) {
-            asetukset.huonoNimi.piilota(true);
+            asetukset.huonoNimi.nayta(true);
             return;
         }
 
         for (Pelaaja p : asetukset.pelaajat) {
             if (p.nimi.equals(nimi)) {
-                asetukset.samaNimi.piilota(true);
+                asetukset.samaNimi.nayta(true);
                 return;
             }
         }

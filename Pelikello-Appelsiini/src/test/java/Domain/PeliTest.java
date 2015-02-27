@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sovelluslogiikka;
+package Domain;
 
+import Domain.Ajastin;
+import Domain.Pelaaja;
+import Domain.Peli;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -28,7 +31,7 @@ public class PeliTest {
         }
 
         Ajastin ajastin = new Ajastin(0, 3);
-        Ajastin aikaRaja = new Ajastin(0, 0, 10);
+        Ajastin aikaRaja = new Ajastin(0, 10);
         peli = new Peli(ajastin, pelaajat, 2, aikaRaja);
         peli.testataan = true;
         peli.ajastin.testataan = true;
@@ -114,14 +117,14 @@ public class PeliTest {
     @Test
     public void pelaaVuoroGraafisessaLisaaPeliAikaa() {
         peli.pelaaVuoroGraafisessa();
-        assertEquals(peli.getPelaaja(peli.vuorossa).peliAika.toString(), "00:00:01");
+        assertEquals(peli.getPelaaja(peli.vuorossa).peliAika.toString(), "00:01");
     }
 
     @Test
     public void pelaaVuoroGraafisessaTosiJosAikaLoppui() {
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 10; i++) {
             peli.pelaaVuoroGraafisessa();
         }
-        assertEquals(peli.aikaLoppui, true);
+        assertEquals(true, peli.aikaLoppui);
     }
 }

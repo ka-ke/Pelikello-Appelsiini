@@ -8,17 +8,26 @@ package Domain;
 /**
  * Luokka, joka ylläpitää ylhäältä vapaasti valitusta sekä alhaalta nollasta
  * rajoitettua laskuria.
+ *
  * @author Kasperi
  */
 public class Laskuri {
 
+    /**
+     * Suurin mahdollinen arvo.
+     */
     public int raja;
+    /**
+     * Tämän hetkinen arvo.
+     */
     public int arvo;
 
     /**
-     * Jos arvo asetetaan suuremmaksi kuin raja, se asettuu automaattisesti rajaan.
-     *  @param  raja Laskurin positiivinen yläraja.
-     * @param arvo Positiivnen lukuarvo, josta laskuri lähtee liikkeelle. 
+     * Jos arvo asetetaan suuremmaksi kuin raja, se asettuu automaattisesti
+     * rajaan.
+     *
+     * @param raja Laskurin positiivinen yläraja.
+     * @param arvo Positiivnen lukuarvo, josta laskuri lähtee liikkeelle.
      */
     public Laskuri(int raja, int arvo) {
         if (raja > 0) {
@@ -35,6 +44,7 @@ public class Laskuri {
     /**
      * Metodi kasvattaa arvoa yhdellä. Jos arvo menisi yli rajan, asetetaan
      * siihen sen sijaan nolla, eli arvo "pyörähtää kierroksen ympäri".
+     *
      * @return True, jos arvo pyörähti ympäri, false jos ei.
      */
     public boolean etene() {
@@ -49,6 +59,7 @@ public class Laskuri {
     /**
      * Metodi vahentaa arvoa yhdellä. Jos arvo menisi negatiiviseksi, asetetaan
      * siihen sen sijaan raja, eli arvo "pyörähtää kierroksen ympäri".
+     *
      * @return True, jos arvo pyörähti ympäri, false jos ei.
      */
     public boolean vahene() {
@@ -65,6 +76,7 @@ public class Laskuri {
      * Metodin avulla laskurin arvon voi asettaa tarvittaessa mihin tahansa
      * lukuarvoon nollan ja rajan välillä. Jos arvoksi asettaa rajaa suuremman
      * arvon, tulee uudeksi arvoksi raja. Negatiivisilla arvoilla arvo ei muutu.
+     *
      * @param uusiarvo arvoksi asetettava luku
      */
     public void setArvo(int uusiarvo) {
@@ -78,10 +90,12 @@ public class Laskuri {
     }
 
     /**
-     * Luokkaa edustava merkkijono, joka muistuttaa digitaalisen kellon esitysmuotoa.
-     * @return Jos arvo on alle 10, lisätään nolla eteen. Muulloin palautetaan arvo. 
+     * Luokkaa edustava merkkijono, joka muistuttaa digitaalisen kellon
+     * esitysmuotoa.
+     *
+     * @return Jos arvo on alle 10, lisätään nolla eteen. Muulloin palautetaan
+     * arvo.
      */
-    
     @Override
     public String toString() {
         if (arvo < 10) {

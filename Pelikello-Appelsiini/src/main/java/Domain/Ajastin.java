@@ -10,20 +10,44 @@ import java.util.logging.Logger;
 
 /**
  * Kolme laskuria sisältävä luokka, jonka avulla voidaan esittää kellonaikoja.
+ *
  * @author Kasperi
  */
 public class Ajastin {
 
+    /**
+     * Laskurin tunteja edustava arvo. Tunnit eivät ole käytössä tämän
+     * hetkisessä versiossa.
+     */
     public Laskuri tunnit;
+    /**
+     * Minuutteja edustava arvo.
+     */
     public Laskuri minuutit;
+    /**
+     * Sekunteja edustava arvo.
+     */
     public Laskuri sekunnit;
+    /**
+     * Tuntien lähtöarvo.
+     */
     int alkuTunnit;
+    /**
+     * Minuuttien lähtöarvo.
+     */
     int alkuMinuutit;
+    /**
+     * Sekuntien lähtöarvo.
+     */
     int alkuSekunnit;
+    /**
+     * Testien yhteydessä käytettävä muuttuja.
+     */
     boolean testataan = false;
 
     /**
      * Konstruktori saa arvokseen ajankohdan, josta lähdetään mittaamaan aikaa.
+     *
      * @param alkuTunnit
      * @param alkuMinuutit
      * @param alkuSekunnit
@@ -49,7 +73,6 @@ public class Ajastin {
      * vähennetään myös suurempa ajanmäärettä.
      */
     public void aikaKuluu() {
-        // testiä ajettaessa ei tarvitse odottaa eikä graafisessa
 //        if (testataan == false) {
 //            try {
 //                Thread.sleep(1000);
@@ -79,14 +102,6 @@ public class Ajastin {
     /**
      * Palauttaa ajastimen lähtöajankohtaansa.
      */
-    // keskeyttämistoiminnallisuus lisätään graafisen käyttöliittymän myötä
-//    public void keskeytaAjastus() {
-//        kaynnissa = false;
-//    }
-//
-//    public void jatkaAjastusta() {
-//        kaynnissa = true;
-//    }
     public void alustaAjastin() {
         tunnit.arvo = alkuTunnit;
         minuutit.arvo = alkuMinuutit;

@@ -5,30 +5,26 @@
  */
 package Kayttoliittyma.GUI;
 
-import Kayttoliittyma.GUI.Kuuntelijat.Nollaaja;
-import Kayttoliittyma.GUI.Kuuntelijat.AjanTallennus;
-import Kayttoliittyma.GUI.Kuuntelijat.AjanotonPaivitin;
+import Kayttoliittyma.GUI.Kuuntelijat.*;
 import Domain.Ajastin;
-import Kayttoliittyma.GUI.Kuuntelijat.Pysaytin;
 import Kayttoliittyma.GUIOhjain;
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
 /**
+ * Ajanottoikkuna ja siihen liittyvä toiminallisuus.
  *
  * @author Kasperi
  */
 public class Ajanotto implements Runnable {
 
-    JFrame laatikko;
-    Timer laukaisin;
-    Ajastin ajastin = new Ajastin(0, 0);
-    ArrayList<String> ajat;
+    private JFrame laatikko;
+    private Timer laukaisin;
+    private Ajastin ajastin = new Ajastin(0, 0);
+    private ArrayList<String> ajat;
 
     @Override
     public void run() {
@@ -39,19 +35,27 @@ public class Ajanotto implements Runnable {
         luoKomponentit(laatikko.getContentPane());
 
         laatikko.pack();
-        laatikko.setVisible(true);
+        nayta(true);
     }
 
     private void luoKomponentit(Container loota) {
-        JLabel kuluvaAika = new JLabel(ajastin.toString());
-        JButton stop = new JButton("ON/OFF");
+
+        loota.setLayout(new GridLayout(2, 1));
+        JPanel ylaosa = new JPanel();
+        JPanel alaosa = new JPanel();
+        ylaosa.setLayout(new GridLayout(1, 1));
+        alaosa.setLayout(new GridLayout(2, 2));
+
+        JLabel kuluvaAika = new JLabel(ajastin.toString(), JLabel.CENTER);
+        kuluvaAika.setFont(new Font("Serif", Font.BOLD, 100));
+        JButton stop = new JButton("Pysäytä/jatka");
         JButton nollaa = new JButton("Nollaa");
         JButton tallenna = new JButton("Tallenna aika");
         JButton lopeta = new JButton("Lopeta ajanotto ja näytä tulokset");
 
         laukaisin = new Timer(1000, new AjanotonPaivitin(kuluvaAika, ajastin));
         Pysaytin pysaytin = new Pysaytin(laukaisin);
-        Nollaaja nollaaja = new Nollaaja(ajastin, kuluvaAika);
+        Nollaaja nollaaja = new Nollaaja(ajastin, kuluvaAika, laukaisin);
 
         tallenna.addActionListener(new AjanTallennus(ajat, ajastin));
         nollaa.addActionListener(nollaaja);
@@ -65,14 +69,22 @@ public class Ajanotto implements Runnable {
             }
         });
 
-        loota.add(kuluvaAika, BorderLayout.CENTER);
-        loota.add(lopeta, BorderLayout.SOUTH);
-        loota.add(nollaa, BorderLayout.NORTH);
-        loota.add(tallenna, BorderLayout.EAST);
-        loota.add(stop, BorderLayout.WEST);
+        ylaosa.add(kuluvaAika);
+        alaosa.add(stop);
+        alaosa.add(nollaa);
+        alaosa.add(tallenna);
+        alaosa.add(lopeta);
+
+        loota.add(ylaosa);
+        loota.add(alaosa);
     }
 
-    public void piilota(boolean b) {
-        laatikko.setVisible(b);
+    /**
+     * GUIOhjaimen käyttämä luokka Ajanotto-ikkunan näkyvyyden määrittämiseksi.
+     *
+     * @param nakyy true jos näkyy, false mikäli ei.
+     */
+    public void nayta(boolean nakyy) {
+        laatikko.setVisible(nakyy);
     }
 }

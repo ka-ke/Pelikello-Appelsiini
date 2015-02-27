@@ -7,31 +7,27 @@ package Kayttoliittyma.GUI.Kuuntelijat;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
+import javax.swing.JFrame;
 
 /**
- * Kuuntelija ajanoton pysäyttämistä varten.
+ * Kuuntelija, joka sulkee ikkunan, joka sitä kutsuu.
  *
  * @author Kasperi
  */
-public class Pysaytin implements ActionListener {
+public class IkkunanSulkija implements ActionListener {
 
-    private Timer laukaisija;
+    private JFrame ikkuna;
 
     /**
      *
-     * @param laukaisija Pysäytettävä laukaisija.
+     * @param ikkuna Suljettava ikkuna.
      */
-    public Pysaytin(Timer laukaisija) {
-        this.laukaisija = laukaisija;
+    public IkkunanSulkija(JFrame ikkuna) {
+        this.ikkuna = ikkuna;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (laukaisija.isRunning()) {
-            laukaisija.stop();
-        } else {
-            laukaisija.start();
-        }
+        ikkuna.setVisible(false);
     }
 }

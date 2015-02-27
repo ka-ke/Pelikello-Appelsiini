@@ -1,4 +1,4 @@
-package Sovelluslogiikka;
+package Domain;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import Sovelluslogiikka.Laskuri;
+import Domain.Laskuri;
 
 /**
  *

@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 public class IlmoitusLoota implements Runnable {
 
     private JFrame ilmoitus;
-    String viesti;
+    private String viesti;
 
     /**
      * @param viesti Teksti, joka on perustelu ikkunan luomisele.
@@ -40,7 +40,7 @@ public class IlmoitusLoota implements Runnable {
         luoKomponentit(ilmoitus.getContentPane());
 
         ilmoitus.pack();
-        ilmoitus.setVisible(false);
+        nayta(false);
     }
 
     /**
@@ -54,7 +54,7 @@ public class IlmoitusLoota implements Runnable {
         ActionListener ok = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ilmoitus.setVisible(false);
+                nayta(false);
             }
         };
         virheOk.addActionListener(ok);
@@ -62,12 +62,12 @@ public class IlmoitusLoota implements Runnable {
         loota.add(virheViesti);
         loota.add(virheOk);
     }
-
-    public void piilota(boolean b) {
-        ilmoitus.setVisible(b);
-    }
-
-    public boolean nakyy() {
-        return ilmoitus.isVisible();
+    /**
+     * GUIOhjaimen käyttämä luokka Ajanotto-ikkunan näkyvyyden määrittämiseksi.
+     *
+     * @param nakyy true jos näkyy, false mikäli ei.
+     */
+    public void nayta(boolean nakyy) {
+        ilmoitus.setVisible(nakyy);
     }
 }

@@ -7,8 +7,8 @@ package Kayttoliittyma.GUI;
 
 import Domain.Pelaaja;
 import Domain.Peli;
-import java.awt.Container;
-import java.awt.Dimension;
+import Kayttoliittyma.GUI.Kuuntelijat.IkkunanSulkija;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -20,11 +20,11 @@ import javax.swing.*;
  */
 public class PelinLopputulokset implements Runnable {
 
-    Peli peli;
-    JFrame laatikko;
+    private Peli peli;
+    private JFrame laatikko;
 
     /**
-     * @param peli Saa tiedot pelistä.
+     * @param peli Saa tiedot pelatusta pelistä.
      */
     public PelinLopputulokset(Peli peli) {
         this.peli = peli;
@@ -33,43 +33,34 @@ public class PelinLopputulokset implements Runnable {
     @Override
     public void run() {
         laatikko = new JFrame("Kulutettu peliaika");
-        laatikko.setPreferredSize(new Dimension(300, 200));
+        laatikko.setPreferredSize(new Dimension(500, 500));
 
         luoKomponentit(laatikko.getContentPane());
 
         laatikko.pack();
-        laatikko.setVisible(true);
+        nayta(true);
     }
 
-    /**
-     * Alustaa ikkunan sisällön. Jokaista pelaajaa kohden luodaan oma
-     * tekstirivinsä.
-     */
     private void luoKomponentit(Container loota) {
 
-        BoxLayout y = new BoxLayout(loota, BoxLayout.Y_AXIS);
-        loota.setLayout(y);
+        loota.setLayout(new GridLayout(peli.pelaajat.size() + 1, 1));
 
         for (int i = 0; i < peli.pelaajat.size(); i++) {
             Pelaaja pelaaja = peli.getPelaaja(i);
-            loota.add(new JLabel(pelaaja.nimi + ": " + pelaaja.getPeliAika()));
+            loota.add(new JLabel(pelaaja.nimi + ": " + pelaaja.getPeliAika(), JLabel.CENTER));
         }
 
-        JButton lopeta = new JButton("Kiitos tiedosta oli kiva peli");
-        lopeta.addActionListener(lopetaPeli);
+        JButton lopeta = new JButton("Kiitos pelistä, palaa käynnistysvalikkoon");
+        lopeta.addActionListener(new IkkunanSulkija(laatikko));
         loota.add(lopeta);
     }
+
     /**
-     * Lopettaa pelin, jolloin käynnistysvalikko jää näkyviin.
+     * GUIOhjaimen käyttämä luokka Ajanotto-ikkunan näkyvyyden määrittämiseksi.
+     *
+     * @param nakyy true jos näkyy, false mikäli ei.
      */
-    ActionListener lopetaPeli = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            piilota(false);
-        }
-    };
-    
-    public void piilota(boolean b) {
-        laatikko.setVisible(b);
+    public void nayta(boolean nakyy) {
+        laatikko.setVisible(nakyy);
     }
 }

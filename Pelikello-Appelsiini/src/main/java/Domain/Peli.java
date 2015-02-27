@@ -14,14 +14,35 @@ import java.util.*;
  */
 public class Peli {
 
+    /**
+     * Pelattujen vuorojen määrä-
+     */
     public int pelattujaVuoroja;
-    public int vuoroRaja;
-    public int vuorossa;
+    /**
+     * Kierrosraja, jonka ylittyessä peli päättyy.
+     */
+    public int kierrosraja;
+    /**
+     * Lista peliä pelaavista pelaajista.
+     */
     public List<Pelaaja> pelaajat;
+    /**
+     * Vuoroajastin.
+     */
     public Ajastin ajastin;
-    public boolean testataan = false;
+    /**
+     * Kertoo, loppuiko joltakin pelaajalta peliaika.
+     */
     public boolean aikaLoppui = false;
-    Ajastin aikaRaja;
+    /**
+     * Kertoo vuorossa olevan pelajan vuoronumeron.
+     */
+    public int vuorossa;
+    /**
+     * Käytetään testien kanssa.
+     */
+    public boolean testataan = false;
+    private Ajastin aikaRaja;
 
     /**
      * Asettaa myös pelatut vuorot ja ensimmäisen vuoronumeron nollaksi.
@@ -33,7 +54,7 @@ public class Peli {
      */
     public Peli(Ajastin ajastin, List<Pelaaja> pelaajat, int vuoroja, Ajastin aikaRaja) {
         pelattujaVuoroja = 0;
-        vuoroRaja = vuoroja;
+        kierrosraja = vuoroja;
         this.ajastin = ajastin;
         this.pelaajat = pelaajat;
         this.aikaRaja = aikaRaja;
@@ -72,11 +93,7 @@ public class Peli {
      */
     public void pelaaVuoroGraafisessa() {
         ajastin.aikaKuluu();
-        Ajastin peliAika = getPelaaja(vuorossa).peliAika;
-        peliAika.aikaaMenee();
-        if (aikaRaja.toString().equals(peliAika.toString())) {
-            aikaLoppui = true;
-        }
+        aikaLoppui = loppuikoAika();
     }
 
     /**
@@ -108,8 +125,13 @@ public class Peli {
         }
         return pelaajat.get(vuorossa + 1);
     }
-//    public void poistaPelaaja(Pelaaja poistettava) {
-//        pelaajat.remove(poistettava);
-//        pelaajat.sort(null);
-//    }
+
+    private boolean loppuikoAika() {
+        Ajastin peliAika = getPelaaja(vuorossa).peliAika;
+        peliAika.aikaaMenee();
+        if (aikaRaja.toString().equals(peliAika.toString())) {
+            return true;
+        }
+        return false;
+    }
 }

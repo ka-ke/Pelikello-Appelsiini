@@ -5,27 +5,14 @@
  */
 package Kayttoliittyma;
 
-import Domain.Aaniefektit.Aani;
-import Kayttoliittyma.*;
-import Kayttoliittyma.GUI.KaynnistysValikko;
-
 /**
- *
+ * Ohjelman pääluokka.
  * @author Kasperi
  */
 public class Main {
 
-    private Aani aani;
-
     public static void main(String[] args) {
 
         GUIOhjain.kaynnisty();
-
-//        Lukija lukija = new Lukija();
-//        PelinLuonninOhjaaja pelinLuoja = new PelinLuonninOhjaaja(lukija);
-//        Peli peli = pelinLuoja.luoPeli();
-//
-//        PelinOhjaaja pelinOhjaus = new PelinOhjaaja(lukija, peli);
-//        pelinOhjaus.pelaaPeli();
     }
 }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sovelluslogiikka;
+package Domain;
 
+import Domain.Pelaaja;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -63,7 +64,7 @@ public class PelaajaTest {
 
     @Test
     public void peliAikaOnAluksiNolla() {
-        assertEquals("00:00:00", eka.getPeliAika());
+        assertEquals("00:00", eka.getPeliAika());
     }
 
 }

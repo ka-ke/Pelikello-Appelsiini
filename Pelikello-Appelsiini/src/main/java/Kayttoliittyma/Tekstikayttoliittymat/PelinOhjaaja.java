@@ -35,7 +35,7 @@ public class PelinOhjaaja {
                 vastaus = lukija.lueRivi();
             }
             seuraavanVuoro();
-            if (peli.pelattujaVuoroja == peli.vuoroRaja) {
+            if (peli.pelattujaVuoroja == peli.kierrosraja) {
                 break;
             }
         }
